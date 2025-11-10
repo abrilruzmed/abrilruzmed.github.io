@@ -1,22 +1,200 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mi primer sitio web</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abril Ruzmed — Cinematographer</title>
+  <meta name="description" content="Mexican cinematographer based in Berlin. Portfolio, showreel y fotografía.">
+  <!-- OpenGraph / Social -->
+  <meta property="og:title" content="Abril Ruzmed — Cinematographer" />
+  <meta property="og:description" content="Mexican cinematographer based in Berlin. Portfolio, showreel y fotografía." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://abrilruzmed.github.io/" />
+  <meta property="og:image" content="https://abrilruzmed.github.io/assets/showreel.jpg" />
+  <link rel="icon" href="assets/favicon.png" />
   <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 50px;
-      background-color: #f7f9fc;
+    :root {
+      --bg: #0f1115;
+      --fg: #e9ecf1;
+      --muted: #a9b0bd;
+      --accent: #9ad1ff;
+      --card: #151823;
+      --border: #23283a;
+      --maxw: 1100px;
     }
-    h1 { color: #333; }
-    p { color: #666; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg); color: var(--fg);
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Layout */
+    header, main, footer { padding-inline: 20px; }
+    .container { max-width: var(--maxw); margin: 0 auto; }
+
+    /* Nav */
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; backdrop-filter: blur(6px);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      z-index: 10;
+    }
+    .brand { font-weight: 700; letter-spacing: .5px; }
+    .nav a { margin-left: 16px; color: var(--fg); opacity: .9; }
+    .nav a:hover { opacity: 1; }
+
+    /* Hero */
+    .hero { display: grid; gap: 14px; padding: 56px 0 28px; }
+    .headline { font-size: clamp(28px, 4vw, 44px); line-height: 1.1; margin: 0; }
+    .sub { color: var(--muted); margin: 6px 0 0; max-width: 60ch; }
+
+    /* Card sections */
+    .section { padding: 28px 0; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 18px; box-shadow: 0 10px 28px rgba(0,0,0,.25);
+    }
+    .section h2 { margin: 0 0 12px; font-size: clamp(20px, 3vw, 26px); }
+
+    /* Showreel */
+    .video-wrap { position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; }
+    .video-wrap iframe, .video-wrap video { width: 100%; height: 100%; border: 0; display: block; }
+
+    /* Grid (fotos / trabajos) */
+    .grid {
+      display: grid; gap: 12px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .grid .item {
+      grid-column: span 12;
+      background: #0b0e16; border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+    }
+    .item img { width: 100%; height: auto; display: block; }
+    .item .cap { padding: 10px 12px; color: var(--muted); font-size: 14px; }
+
+    @media (min-width: 640px) {
+      .grid .item { grid-column: span 6; }
+    }
+    @media (min-width: 980px) {
+      .grid .item { grid-column: span 4; }
+    }
+
+    /* About */
+    .about p { color: var(--muted); margin: 0 0 10px; max-width: 70ch; }
+
+    /* Contact */
+    .contact a.btn {
+      display: inline-block; padding: 10px 14px; border-radius: 10px;
+      border: 1px solid var(--border); background: #0b0e16; color: var(--fg);
+    }
+    .contact a.btn:hover { background: #0f1422; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding-block: 26px; color: var(--muted); font-size: 14px; }
+    .social a { margin-right: 12px; }
   </style>
 </head>
 <body>
-  <h1>¡Hola, mundo! 🌎</h1>
-  <p>Este es mi primer sitio web gratis en GitHub Pages.</p>
-  <p>Creado con ayuda de ChatGPT 😄</p>
+  <header class="container nav" role="navigation" aria-label="Primary">
+    <div class="brand">Abril Ruzmed — Cinematographer</div>
+    <nav>
+      <a href="#showreel">Showreel</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="headline">Mexican cinematographer based in Berlin.</h1>
+      <p class="sub">Narrativa visual, dirección de fotografía y motion para cine, documental y publicidad.</p>
+    </section>
+
+    <!-- Showreel -->
+    <section id="showreel" class="section">
+      <div class="card">
+        <h2>Showreel</h2>
+        <div class="video-wrap">
+          <!-- Reemplaza el src por tu link (YouTube o Vimeo). Ejemplos abajo -->
+          <!-- YouTube (modo privacidad): https://www.youtube-nocookie.com/embed/VIDEO_ID -->
+          <!-- Vimeo: https://player.vimeo.com/video/VIDEO_ID -->
+          <iframe
+            src="https://player.vimeo.com/video/76979871?h=bf9c7c"
+            title="Showreel"
+            loading="lazy"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid de trabajos / fotos -->
+    <section id="work" class="section">
+      <div class="card">
+        <h2>Selected Work</h2>
+        <div class="grid">
+          <!-- Item 1 -->
+          <figure class="item">
+            <img src="assets/foto1.jpg" alt="Still de proyecto 1" loading="lazy" />
+            <figcaption class="cap"><strong>Proyecto 1</strong> — Cortometraje (2024) · DoP</figcaption>
+          </figure>
+          <!-- Item 2 -->
+          <figure class="item">
+            <img src="assets/foto2.jpg" alt="Still de proyecto 2" loading="lazy" />
+            <figcaption class="cap"><strong>Proyecto 2</strong> — Comercial (2025) · DoP</figcaption>
+          </figure>
+          <!-- Item 3 -->
+          <figure class="item">
+            <img src="assets/foto3.jpg" alt="Still de proyecto 3" loading="lazy" />
+            <figcaption class="cap"><strong>Proyecto 3</strong> — Documental (2023) · DoP</figcaption>
+          </figure>
+          <!-- Duplica más bloques figure según necesites -->
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="card about">
+        <h2>About</h2>
+        <p>Soy una cinefotógrafa mexicana radicada en Berlín. Me interesa la luz natural, el movimiento de cámara y el ritmo emocional de cada historia.</p>
+        <p>Disponible para proyectos en Europa y Latinoamérica. Hablo español, inglés y alemán.</p>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contact" class="section">
+      <div class="card contact">
+        <h2>Contact</h2>
+        <!-- Opción rápida: mailto -->
+        <p>
+          Escríbeme a
+          <a class="btn" href="mailto:tuemail@example.com?subject=Inquiry%20-%20Cinematography">tuemail@example.com</a>
+        </p>
+        <!-- Si quieres formulario real sin backend, mira Formspree/Netlify Forms (te puedo pasar el snippet cuando quieras) -->
+        <div class="social" aria-label="Redes sociales">
+          <a href="https://vimeo.com/" target="_blank" rel="noopener">Vimeo</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.imdb.com/" target="_blank" rel="noopener">IMDb</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div>© <span id="y"></span> Abril Ruzmed • All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Año automático en el footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
