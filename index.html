@@ -184,34 +184,36 @@
     }
 
     /* Banner grande: Abril Ruzmed, más ancho y menos alto */
-    .title-banner{
-      display:block;
-      width:100%;
-      max-width:720px;          /* mismo ancho visual que el reel */
-      margin:0 auto;
+   .title-banner{
+  display:block;
+  width:100%;
+  max-width:720px;        /* mismo ancho que el reel */
+  margin:0 auto;
 
-      font-family: "Cinzel", serif;
-      font-weight:700;
-      line-height:1.05;
-      font-size:clamp(38px, 7.4vw, 86px);
-      letter-spacing:.03em;
-      color: var(--ink);
-      background:
-        radial-gradient(120% 160% at 50% 0%, rgba(255,255,255,.12), transparent 60%),
-        linear-gradient(180deg, rgba(12,14,22,.92), rgba(12,14,22,.58));
-      border:1px solid color-mix(in oklab, var(--line) 70%, #3f4c7a 30%);
-      border-radius:22px;
+  font-family: "Cinzel", serif;
+  font-weight:700;
+  line-height:1.05;
+  font-size:clamp(38px, 7.4vw, 86px);
+  letter-spacing:.03em;
+  color: var(--ink);
+  background:
+    radial-gradient(120% 160% at 50% 0%, rgba(255,255,255,.12), transparent 60%),
+    linear-gradient(180deg, rgba(12,14,22,.92), rgba(12,14,22,.58));
+  border:1px solid color-mix(in oklab, var(--line) 70%, #3f4c7a 30%);
+  border-radius:22px;
 
-      /* MÁS ANCHO, MENOS ALTO 👇 */
-      padding:clamp(8px, 1.2vw, 12px) clamp(40px, 5vw, 72px);
+  /* MÁS ANCHO, MENOS ALTO 👇 */
+  padding:clamp(8px, 1.2vw, 12px) clamp(40px, 5vw, 72px);
 
-      box-shadow:
-        0 22px 70px rgba(0,0,0,.78),
-        inset 0 0 40px rgba(255,255,255,.04);
-      position:relative;
-      isolation:isolate;
-      animation: lightsOn 1.6s ease-out both;
-    }
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.78),
+    inset 0 0 40px rgba(255,255,255,.04);
+  position:relative;
+  isolation:isolate;
+  animation: lightsOn 1.6s ease-out both;
+}
+
+
 
     .title-banner span.title-sub{
       font-weight:500;
@@ -353,13 +355,20 @@
 
     /* ---------- HOVER IMÁGENES ---------- */
 
-    .showreel-thumb img,
-    .stills img,
-    .bts-grid img,
-    .about-portrait{
-      transition:transform .3s ease, box-shadow .3s ease, filter .3s ease;
-      transform-origin:center;
-    }
+    /* Transición suave para TODO menos proyectos */
+.showreel-thumb img,
+.bts-grid img,
+.about-portrait{
+  transition:transform .3s ease, box-shadow .3s ease, filter .3s ease;
+  transform-origin:center;
+}
+
+/* Proyectos: sin transición de transform, así no "brinca" raro */
+.stills img{
+  transform-origin:center;
+  transition:none;
+}
+
 
     @media (hover:hover){
       /* Proyectos: vista completa centrada en pantalla */
