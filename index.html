@@ -82,7 +82,7 @@
     h1{margin:0;}
     h2{margin:0 0 12px; font-size:clamp(20px,3.3vw,28px)}
 
-    /* Showreel */
+    /* SHOWREEL */
     .showreel-thumb{
       position:relative;
       aspect-ratio:16/9;
@@ -97,7 +97,7 @@
       filter:saturate(110%) contrast(105%);
     }
 
-    /* Projects grid */
+    /* PROJECTS GRID */
     .projects{display:grid; gap:16px; grid-template-columns:repeat(12,1fr)}
     .proj{grid-column:span 12}
     @media(min-width:760px){ .proj{grid-column:span 6} }
@@ -184,38 +184,36 @@
     }
 
     /* Banner grande: Abril Ruzmed, más ancho y menos alto */
-   .title-banner{
-  display:block;
-  width:100%;
-  max-width:720px;        /* mismo ancho que el reel */
-  margin:0 auto;
+    .title-banner{
+      display:block;
+      width:100%;
+      max-width:720px;        /* mismo ancho que el reel */
+      margin:0 auto;
 
-  font-family: "Cinzel", serif;
-  font-weight:700;
-  line-height:1.05;
-  font-size:clamp(38px, 7.4vw, 86px);
-  letter-spacing:.03em;
-  color: var(--ink);
-  background:
-    radial-gradient(120% 160% at 50% 0%, rgba(255,255,255,.12), transparent 60%),
-    linear-gradient(180deg, rgba(12,14,22,.92), rgba(12,14,22,.58));
-  border:1px solid color-mix(in oklab, var(--line) 70%, #3f4c7a 30%);
-  border-radius:22px;
+      font-family: "Cinzel", serif;
+      font-weight:700;
+      line-height:1.05;
+      font-size:clamp(38px, 7.4vw, 86px);
+      letter-spacing:.03em;
+      color: var(--ink);
+      background:
+        radial-gradient(120% 160% at 50% 0%, rgba(255,255,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(12,14,22,.92), rgba(12,14,22,.58));
+      border:1px solid color-mix(in oklab, var(--line) 70%, #3f4c7a 30%);
+      border-radius:22px;
 
-  /* MÁS ANCHO, MENOS ALTO 👇 */
-  padding:clamp(8px, 1.2vw, 12px) clamp(40px, 5vw, 72px);
+      /* MÁS ANCHO, MENOS ALTO */
+      padding:clamp(8px, 1.2vw, 12px) clamp(40px, 5vw, 72px);
 
-  box-shadow:
-    0 22px 70px rgba(0,0,0,.78),
-    inset 0 0 40px rgba(255,255,255,.04);
-  position:relative;
-  isolation:isolate;
-  animation: lightsOn 1.6s ease-out both;
-}
+      box-shadow:
+        0 22px 70px rgba(0,0,0,.78),
+        inset 0 0 40px rgba(255,255,255,.04);
+      position:relative;
+      isolation:isolate;
+      animation: lightsOn 1.6s ease-out both;
+    }
 
-
-
-    .title-banner span.title-sub{
+    .title-banner .title-sub{
       font-weight:500;
       letter-spacing:.12em;
       font-size:.45em;
@@ -356,22 +354,21 @@
     /* ---------- HOVER IMÁGENES ---------- */
 
     /* Transición suave para TODO menos proyectos */
-.showreel-thumb img,
-.bts-grid img,
-.about-portrait{
-  transition:transform .3s ease, box-shadow .3s ease, filter .3s ease;
-  transform-origin:center;
-}
+    .showreel-thumb img,
+    .bts-grid img,
+    .about-portrait{
+      transition:transform .3s ease, box-shadow .3s ease, filter .3s ease;
+      transform-origin:center;
+    }
 
-/* Proyectos: sin transición de transform, así no "brinca" raro */
-.stills img{
-  transform-origin:center;
-  transition:none;
-}
-
+    /* Proyectos: sin transición para evitar “brinco” raro al hacer fixed */
+    .stills img{
+      transform-origin:center;
+      transition:none;
+    }
 
     @media (hover:hover){
-      /* Proyectos: vista completa centrada en pantalla */
+      /* Proyectos: vista completa centrada en pantalla al pasar el cursor */
       .stills img:hover{
         position:fixed;
         top:50%;
@@ -390,7 +387,7 @@
       /* BTS + retrato: zoom fuerte local */
       .bts-grid img:hover,
       .about-portrait:hover{
-        transform:scale(3);
+        transform:scale(4);
         box-shadow:0 24px 80px rgba(0,0,0,.9);
         filter:saturate(120%) contrast(112%);
       }
@@ -609,16 +606,21 @@
     document.getElementById('y').textContent = new Date().getFullYear();
 
     // Reveal on scroll
-    const io = new IntersectionObserver(es=>{
-      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
     }, {threshold: .2});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
     // Animación palabra por palabra en "MEXICAN CINEMATOGRAPHER BASED IN BERLIN"
     const lead = document.querySelector('.lead-banner');
     if (lead) {
-      const text = lead.textContent.trim();           // "MEXICAN CINEMATOGRAPHER BASED IN BERLIN"
-      const words = text.split(" ");                  // ["MEXICAN","CINEMATOGRAPHER","BASED","IN","BERLIN"]
+      const text = lead.textContent.trim();
+      const words = text.split(" ");
       lead.textContent = "";
       words.forEach((word, index) => {
         const span = document.createElement('span');
@@ -634,3 +636,4 @@
   </script>
 </body>
 </html>
+
