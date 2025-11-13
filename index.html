@@ -378,13 +378,13 @@
       aspect-ratio:4/3;
     }
 
-    /* ---------- HOVER: ampliar todas las imágenes ---------- */
+    /* ---------- HOVER: ampliar todas las imágenes (x4) ---------- */
 
     .showreel-thumb img,
     .stills img,
     .bts-grid img,
     .about-portrait{
-      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+      transition:transform .3s ease, box-shadow .3s ease, filter .3s ease;
       transform-origin:center;
     }
 
@@ -393,9 +393,9 @@
       .stills img:hover,
       .bts-grid img:hover,
       .about-portrait:hover{
-        transform:scale(1.05);
-        box-shadow:0 18px 60px rgba(0,0,0,.8);
-        filter:saturate(115%) contrast(108%);
+        transform:scale(4);  /* 👈 zoom 4x */
+        box-shadow:0 24px 80px rgba(0,0,0,.9);
+        filter:saturate(120%) contrast(110%);
       }
     }
 
@@ -422,8 +422,10 @@
     <!-- HERO -->
     <section class="hero">
       <div class="wrap">
-        <!-- Banner pequeño (texto, letras una por una) -->
-        <span class="lead-banner">Mexican cinematographer based in Berlin</span>
+        <!-- Banner pequeño (texto, letras una por una, con ESPACIOS) -->
+        <span class="lead-banner">
+          MEXICAN CINEMATOGRAPHER BASED IN BERLIN
+        </span>
 
         <!-- Banner grande con nombre centrado y vintage, SIN guion -->
         <h1 class="title-banner">
@@ -530,7 +532,7 @@
           <h2>About</h2>
 
           <div class="about-inner">
-            <!-- Foto tuya: asegúrate de subir assets/abril_portrait.jpg -->
+            <!-- Foto tuya -->
             <img class="about-portrait" src="assets/abril_portrait.jpg" alt="Portrait of Abril Ruzmed" loading="lazy" />
 
             <div class="about-text">
@@ -625,10 +627,10 @@
     }, {threshold: .2});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    // Animación letras una por una en "Mexican cinematographer based in Berlin"
+    // Animación letras una por una en "MEXICAN CINEMATOGRAPHER BASED IN BERLIN"
     const lead = document.querySelector('.lead-banner');
     if (lead) {
-      const text = lead.textContent.trim();
+      const text = lead.textContent;
       lead.textContent = '';
       Array.from(text).forEach((ch, idx) => {
         const span = document.createElement('span');
@@ -641,4 +643,3 @@
   </script>
 </body>
 </html>
-
