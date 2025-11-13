@@ -187,25 +187,29 @@
 
     /* Banner grande: nombre centrado, tipografía vintage */
     .title-banner{
-      display:inline-block;
-      font-family: "Cinzel", serif;
-      font-weight:700;
-      line-height:1.05;
-      font-size:clamp(38px, 7.4vw, 86px);
-      letter-spacing:.03em;
-      color: var(--ink);
-      background: radial-gradient(120% 160% at 50% 0%, rgba(255,255,255,.12), transparent 60%),
-                  linear-gradient(180deg, rgba(12,14,22,.92), rgba(12,14,22,.58));
-      border:1px solid color-mix(in oklab, var(--line) 70%, #3f4c7a 30%);
-      border-radius:22px;
-      padding:clamp(16px, 2.3vw, 24px) clamp(20px, 3.4vw, 34px);
-      box-shadow:
-        0 22px 70px rgba(0,0,0,.78),
-        inset 0 0 40px rgba(255,255,255,.04);
-      position:relative;
-      isolation:isolate;
-      animation: lightsOn 1.6s ease-out both;
-    }
+  display:block;                 /* antes era inline-block */
+  width:100%;                    /* que pueda ocupar todo el ancho disponible */
+  max-width:720px;               /* mismo ancho “visual” que el reel */
+  margin:0 auto;                 /* centrado */
+
+  font-family: "Cinzel", serif;
+  font-weight:700;
+  line-height:1.05;
+  font-size:clamp(38px, 7.4vw, 86px);
+  letter-spacing:.03em;
+  color: var(--ink);
+  background: radial-gradient(120% 160% at 50% 0%, rgba(255,255,255,.12), transparent 60%),
+              linear-gradient(180deg, rgba(12,14,22,.92), rgba(12,14,22,.58));
+  border:1px solid color-mix(in oklab, var(--line) 70%, #3f4c7a 30%);
+  border-radius:22px;
+  padding:clamp(16px, 2.3vw, 24px) clamp(20px, 3.4vw, 34px);
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.78),
+    inset 0 0 40px rgba(255,255,255,.04);
+  position:relative;
+  isolation:isolate;
+  animation: lightsOn 1.6s ease-out both;
+}
 
     .title-banner span.title-sub{
       font-weight:500;
@@ -378,26 +382,36 @@
       aspect-ratio:4/3;
     }
 
-    /* ---------- HOVER: ampliar todas las imágenes (x4) ---------- */
+    /* ---------- HOVER: ampliar imágenes ---------- */
 
-    .showreel-thumb img,
-    .stills img,
-    .bts-grid img,
-    .about-portrait{
-      transition:transform .3s ease, box-shadow .3s ease, filter .3s ease;
-      transform-origin:center;
-    }
+/* Todas comparten la misma transición suave */
+.showreel-thumb img,
+.stills img,
+.bts-grid img,
+.about-portrait{
+  transition:transform .3s ease, box-shadow .3s ease, filter .3s ease;
+  transform-origin:center;
+}
 
-    @media (hover:hover){
-      .showreel-thumb:hover img,
-      .stills img:hover,
-      .bts-grid img:hover,
-      .about-portrait:hover{
-        transform:scale(4);  /* 👈 zoom 4x */
-        box-shadow:0 24px 80px rgba(0,0,0,.9);
-        filter:saturate(120%) contrast(110%);
-      }
-    }
+@media (hover:hover){
+  /* Proyectos: zoom moderado x2 */
+  .stills img:hover{
+    transform:scale(2);
+    box-shadow:0 20px 70px rgba(0,0,0,.9);
+    filter:saturate(118%) contrast(110%);
+  }
+
+  /* BTS + portrait: zoom grande x4 (como te gusta) */
+  .bts-grid img:hover,
+  .about-portrait:hover{
+    transform:scale(4);
+    box-shadow:0 24px 80px rgba(0,0,0,.9);
+    filter:saturate(120%) contrast(112%);
+  }
+
+  /* Reel: sin zoom (no ponemos regla para .showreel-thumb:hover img) */
+}
+
 
     /* Suavizar top padding en pantallas grandes */
     @media(min-width: 760px){
