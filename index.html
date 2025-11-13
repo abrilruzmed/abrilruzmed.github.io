@@ -122,10 +122,6 @@
     .meta{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
     .roles{color:var(--mute); font-size:14px}
 
-    .about p{
-      color:var(--mute); margin:0 0 10px; max-width:75ch;
-    }
-
     .links a{margin-right:14px}
 
     .btn{
@@ -142,7 +138,7 @@
       font-size:14px; padding:26px 0; margin-top:10px
     }
 
-    /* Subtle in-view animation */
+    /* Reveal on scroll */
     .reveal{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease}
     .reveal.in{opacity:1; transform:none}
 
@@ -164,21 +160,28 @@
       text-align:center;
     }
 
-    /* Banner pequeño arriba: tungsten (cálido) */
+    /* Banner pequeño: solo texto, sin relleno, letras una por una */
     .lead-banner{
       display:inline-block;
-      font: 600 12px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      letter-spacing:.12em;
+      font: 600 11px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.16em;
       text-transform:uppercase;
-      color:#ffc78a; /* tungsteno cálido */
-      background: color-mix(in oklab, #2a170f 60%, var(--panel) 40%);
-      border:1px solid rgba(255,180,120,.7);
-      border-radius:999px;
-      padding:10px 16px;
-      margin-bottom:16px;
-      box-shadow:
-        0 0 24px rgba(255,180,120,.45),
-        0 8px 28px rgba(0,0,0,.55);
+      color:#b5c4ff; /* mismo color que Cinematographer */
+      margin-bottom:20px;
+      white-space:nowrap;
+    }
+    .lead-banner .char{
+      opacity:0;
+      display:inline-block;
+      transform:translateX(-16px);
+      animation: slideInChar .38s ease-out forwards;
+      animation-delay: calc(var(--i) * 0.045s);
+    }
+    @keyframes slideInChar {
+      to{
+        opacity:1;
+        transform:translateX(0);
+      }
     }
 
     /* Banner grande: nombre centrado, tipografía vintage */
@@ -254,7 +257,7 @@
       box-shadow:0 0 20px rgba(60,200,140,.35);
     }
 
-    /* Animación: luces que se encienden (fade + glow) */
+    /* Animación: luces que se encienden (fade + glow) para el título */
     @keyframes lightsOn {
       0% {
         opacity:0;
@@ -283,6 +286,7 @@
 
     @media (prefers-reduced-motion: reduce){
       .title-banner{ animation:none; }
+      .lead-banner .char{ animation:none; opacity:1; transform:none; }
       *{scroll-behavior:auto; transition:none !important; animation:none !important;}
     }
 
@@ -314,9 +318,63 @@
     /* Contenido por encima de la atmósfera */
     header.nav, main, footer{ position:relative; z-index:1; }
 
-    /* Centrar texto de About */
-    .about{ text-align:center; }
-    .about p{ margin-left:auto; margin-right:auto; }
+    /* ---------- ABOUT + FOTO + BTS ---------- */
+
+    .about{
+      text-align:center;
+    }
+    .about-inner{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+    }
+    .about-portrait{
+      width:180px;
+      height:180px;
+      border-radius:999px;
+      object-fit:cover;
+      border:2px solid rgba(141,225,255,.8);
+      box-shadow:0 18px 50px rgba(0,0,0,.6);
+    }
+    .about-text{
+      max-width:75ch;
+      color:var(--mute);
+    }
+    .about-text p{
+      margin:0 0 10px;
+    }
+
+    .bts-block{
+      margin-top:26px;
+      text-align:left;
+      width:100%;
+    }
+    .bts-block h3{
+      margin:0 0 12px;
+      font-size:18px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#b5c4ff;
+    }
+    .bts-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+    @media(min-width:760px){
+      .bts-grid{
+        grid-template-columns:repeat(5,1fr);
+      }
+    }
+    .bts-grid img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid var(--line);
+      box-shadow:0 10px 32px rgba(0,0,0,.6);
+    }
 
     /* Suavizar top padding en pantallas grandes */
     @media(min-width: 760px){
@@ -341,8 +399,8 @@
     <!-- HERO -->
     <section class="hero">
       <div class="wrap">
-        <!-- Banner pequeño -->
-        <span class="lead-banner reveal">Mexican cinematographer based in Berlin</span>
+        <!-- Banner pequeño (texto, letras una por una) -->
+        <span class="lead-banner">Mexican cinematographer based in Berlin</span>
 
         <!-- Banner grande con nombre centrado y vintage, SIN guion -->
         <h1 class="title-banner">
@@ -442,25 +500,51 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT + PORTRAIT + BTS -->
     <section id="about">
       <div class="wrap">
         <div class="card about reveal">
           <h2>About</h2>
-          <p>
-            I am a Mexican cinematographer based in Berlin. My practice focuses on lighting design,
-            the narrative energy of camera movement, and the creative intuition of editing.
-          </p>
-          <p>
-            I collaborate on fiction and documentary projects. My journey through production instilled responsibility and resilience,
-            as well as rigor and a deep awareness of the emotional labor we carry while crafting cinema.
-          </p>
-          <p>
-            Available for projects in Europe and Latin America. Languages: Spanish, English, Portuguese.
-          </p>
-          <div style="margin-top:10px">
-            <a class="btn" href="assets/AbrilRuzmed_CV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+
+          <div class="about-inner">
+            <!-- Foto tuya: asegúrate de subir assets/abril_portrait.jpg -->
+            <img class="about-portrait" src="assets/abril_portrait.jpg" alt="Portrait of Abril Ruzmed" loading="lazy" />
+
+            <div class="about-text">
+              <p>
+                I am a Mexican cinematographer based in Berlin. My practice focuses on lighting design,
+                the narrative energy of camera movement, and the creative intuition of editing.
+              </p>
+              <p>
+                I collaborate on fiction and documentary projects. My journey through production instilled responsibility and resilience,
+                as well as rigor and a deep awareness of the emotional labor we carry while crafting cinema.
+              </p>
+              <p>
+                Available for projects in Europe and Latin America. Languages: Spanish, English, Portuguese.
+              </p>
+              <div style="margin-top:10px">
+                <a class="btn" href="assets/cv_abril_ruzmed.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+              </div>
+            </div>
           </div>
+
+          <!-- Behind the Scenes -->
+          <div class="bts-block">
+            <h3>Behind the Scenes</h3>
+            <div class="bts-grid">
+              <img src="assets/bts1.jpg" alt="Behind the scenes 1" loading="lazy" />
+              <img src="assets/bts2.jpg" alt="Behind the scenes 2" loading="lazy" />
+              <img src="assets/bts3.jpg" alt="Behind the scenes 3" loading="lazy" />
+              <img src="assets/bts4.jpg" alt="Behind the scenes 4" loading="lazy" />
+              <img src="assets/bts5.jpg" alt="Behind the scenes 5" loading="lazy" />
+              <img src="assets/bts6.jpg" alt="Behind the scenes 6" loading="lazy" />
+              <img src="assets/bts7.jpg" alt="Behind the scenes 7" loading="lazy" />
+              <img src="assets/bts8.jpg" alt="Behind the scenes 8" loading="lazy" />
+              <img src="assets/bts9.jpg" alt="Behind the scenes 9" loading="lazy" />
+              <img src="assets/bts10.jpg" alt="Behind the scenes 10" loading="lazy" />
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -517,6 +601,20 @@
       es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
     }, {threshold: .2});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Animación letras una por una en "Mexican cinematographer based in Berlin"
+    const lead = document.querySelector('.lead-banner');
+    if (lead) {
+      const text = lead.textContent.trim();
+      lead.textContent = '';
+      Array.from(text).forEach((ch, idx) => {
+        const span = document.createElement('span');
+        span.textContent = ch;
+        span.className = 'char';
+        span.style.setProperty('--i', idx);
+        lead.appendChild(span);
+      });
+    }
   </script>
 </body>
 </html>
