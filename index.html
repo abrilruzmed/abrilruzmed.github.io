@@ -115,10 +115,37 @@
       display:block;
       border-radius:10px;
       border:1px solid var(--line);
+      transform-origin:center;
+      transition:transform .35s ease, box-shadow .35s ease, filter .35s ease;
     }
 
-    .meta{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
-    .roles{color:var(--mute); font-size:14px}
+    .meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap
+    }
+
+    .roles{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:flex-end;
+      align-items:center;
+    }
+
+    .role-chip{
+      border:1px solid rgba(140,255,180,.75);
+      background: radial-gradient(120% 160% at 50% 0%, rgba(80,255,170,.12), transparent 60%),
+                  #07170f;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:11px;
+      color:#9fffb4;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
 
     .links a{margin-right:14px}
 
@@ -144,7 +171,7 @@
 
     .hero{
       position: relative;
-      padding: 96px 0 36px;
+      padding: 72px 0 36px; /* antes 96px, lo subimos un poco */
       background:
         radial-gradient(950px 520px at 15% 0%, rgba(255,170,110,.32), transparent 60%),
         radial-gradient(950px 520px at 85% 10%, rgba(141,225,255,.26), transparent 60%),
@@ -237,7 +264,7 @@
     }
 
     .tag{
-      margin-top:16px;
+      margin-top:28px;  /* más espacio respecto al banner */
       max-width:78ch;
       text-align:center;
       color:var(--mute);
@@ -291,11 +318,18 @@
         radial-gradient(1200px 650px at 90% 0%, rgba(90,190,255,.22), transparent 65%),
         radial-gradient(1600px 900px at 50% -10%, rgba(255,255,255,.08), transparent 70%);
       filter:blur(8px);
+      animation:drift 26s ease-in-out infinite alternate;
     }
     body::after{
       background:
         radial-gradient(85% 70% at 50% 18%, transparent 0%, transparent 52%, rgba(0,0,0,.38) 100%);
       mix-blend-mode:multiply;
+    }
+
+    @keyframes drift{
+      0%   { transform:translate3d(0,0,0); }
+      50%  { transform:translate3d(-20px, 10px, 0); }
+      100% { transform:translate3d(18px, -15px, 0); }
     }
 
     header.nav, main, footer{ position:relative; z-index:1; }
@@ -353,7 +387,6 @@
 
     /* ---------- HOVER IMÁGENES ---------- */
 
-    /* Transición suave para TODO menos proyectos */
     .showreel-thumb img,
     .bts-grid img,
     .about-portrait{
@@ -361,26 +394,12 @@
       transform-origin:center;
     }
 
-    /* Proyectos: sin transición para evitar “brinco” raro al hacer fixed */
-    .stills img{
-      transform-origin:center;
-      transition:none;
-    }
-
     @media (hover:hover){
-      /* Proyectos: vista completa centrada en pantalla al pasar el cursor */
+      /* Proyectos: zoom fuerte pero sin fixed, para evitar flicker */
       .stills img:hover{
-        position:fixed;
-        top:50%;
-        left:50%;
-        transform:translate(-50%, -50%);
-        width:min(90vw, 90vh);
-        height:auto;
-        object-fit:contain;
-        z-index:9999;
-        box-shadow:0 24px 80px rgba(0,0,0,.95);
-        background:#000;
-        border-radius:0;
+        transform:scale(1.8);
+        z-index:3;
+        box-shadow:0 18px 60px rgba(0,0,0,.85);
         filter:saturate(118%) contrast(110%);
       }
 
@@ -395,7 +414,39 @@
     }
 
     @media(min-width: 760px){
-      .hero{ padding-top:112px; }
+      .hero{ padding:88px 0 40px; } /* ajustado en desktop también */
+    }
+
+    /* ---------- CONTACT + ICONOS ---------- */
+
+    #contact .card{
+      text-align:center;
+    }
+
+    .links{
+      margin-top:10px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+    }
+    .links a{
+      margin-right:0;
+    }
+
+    .social-icon{
+      width:36px;
+      height:36px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:radial-gradient(120% 160% at 50% 0%, rgba(141,225,255,.18), transparent 60%),
+                 #05060b;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.06em;
+      color:#e8ecf3;
     }
   </style>
 </head>
@@ -426,19 +477,13 @@
           <span class="title-sub">Cinematographer</span>
         </h1>
 
-        <p class="tag reveal" style="margin-top:12px">
+        <p class="tag reveal" id="tagline">
           Audiovisual creator, filmmaker, cinematographer — 10+ years between Mexico and Berlin.
           Lighting, camera movement, and creative editing in service of story across narrative,
           documentary, and commercial work.
         </p>
 
-        <div class="chips reveal">
-          <span class="chip">Narrative</span>
-          <span class="chip">Documentary</span>
-          <span class="chip">Commercial</span>
-          <span class="chip">Color</span>
-          <span class="chip">Motion</span>
-        </div>
+        <!-- Eliminamos los chips originales de Narrative / Documentary, etc. -->
       </div>
     </section>
 
@@ -463,7 +508,11 @@
           <article class="card proj reveal">
             <div class="meta">
               <h3 style="margin:0">Prototype</h3>
-              <div class="roles">Director, DoP, Colorist</div>
+              <div class="roles">
+                <span class="role-chip">Director</span>
+                <span class="role-chip">DoP</span>
+                <span class="role-chip">Colorist</span>
+              </div>
             </div>
             <div class="stills">
               <img class="s1" src="assets/prototype1.jpg" alt="Prototype still 1" loading="lazy" />
@@ -475,7 +524,10 @@
           <article class="card proj reveal">
             <div class="meta">
               <h3 style="margin:0">After Life</h3>
-              <div class="roles">DoP, Colorist</div>
+              <div class="roles">
+                <span class="role-chip">DoP</span>
+                <span class="role-chip">Colorist</span>
+              </div>
             </div>
             <div class="stills">
               <img class="s1" src="assets/afterlife1.jpg" alt="After Life still 1" loading="lazy" />
@@ -487,7 +539,9 @@
           <article class="card proj reveal">
             <div class="meta">
               <h3 style="margin:0">The Serial Däter</h3>
-              <div class="roles">DoP</div>
+              <div class="roles">
+                <span class="role-chip">DoP</span>
+              </div>
             </div>
             <div class="stills">
               <img class="s1" src="assets/serialdater1.jpg" alt="The Serial Däter still 1" loading="lazy" />
@@ -499,7 +553,11 @@
           <article class="card proj reveal">
             <div class="meta">
               <h3 style="margin:0">Summers in January</h3>
-              <div class="roles">DoP, Editor, Colorist</div>
+              <div class="roles">
+                <span class="role-chip">DoP</span>
+                <span class="role-chip">Editor</span>
+                <span class="role-chip">Colorist</span>
+              </div>
             </div>
             <div class="stills">
               <img class="s1" src="assets/summers1.jpg" alt="Summers in January still 1" loading="lazy" />
@@ -567,10 +625,18 @@
             <a class="btn" href="mailto:aruiz.med@gmail.com?subject=Inquiry%20—%20Cinematography">aruiz.med@gmail.com</a>
           </p>
           <p class="links" aria-label="External profiles">
-            <a href="https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk" target="_blank" rel="noopener">IMDb</a>
-            <a href="https://www.crew-united.com/de/Abril-Ruzmed_740412.html" target="_blank" rel="noopener">Crew United</a>
-            <a href="https://www.instagram.com/abril_ruzmed/" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.linkedin.com/in/abril-ruzmed-12385a56/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk" target="_blank" rel="noopener" aria-label="IMDb">
+              <span class="social-icon">IM</span>
+            </a>
+            <a href="https://www.crew-united.com/de/Abril-Ruzmed_740412.html" target="_blank" rel="noopener" aria-label="Crew United">
+              <span class="social-icon">CU</span>
+            </a>
+            <a href="https://www.instagram.com/abril_ruzmed/" target="_blank" rel="noopener" aria-label="Instagram">
+              <span class="social-icon">IG</span>
+            </a>
+            <a href="https://www.linkedin.com/in/abril-ruzmed-12385a56/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <span class="social-icon">IN</span>
+            </a>
           </p>
         </div>
       </div>
@@ -633,6 +699,37 @@
         }
       });
     }
+
+    // Máquina de escribir para el tagline
+    const prefersReduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const tagline = document.getElementById('tagline');
+    if (tagline) {
+      const fullText = tagline.textContent.trim();
+
+      if (prefersReduced) {
+        tagline.textContent = fullText;
+      } else {
+        tagline.textContent = "";
+        let i = 0;
+
+        function typeNext() {
+          if (i <= fullText.length) {
+            const visible = fullText.slice(0, i);
+            tagline.textContent = visible + '▌'; // cursor
+            i++;
+            const delay = 28;
+            setTimeout(typeNext, delay);
+          } else {
+            tagline.textContent = fullText; // quitamos el cursor al final
+          }
+        }
+
+        typeNext();
+      }
+    }
   </script>
 </body>
 </html>
+
