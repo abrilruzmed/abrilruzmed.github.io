@@ -171,7 +171,7 @@
 
     .hero{
       position: relative;
-      padding: 72px 0 36px; /* antes 96px, lo subimos un poco */
+      padding: 72px 0 72px; /* más espacio debajo del hero */
       background:
         radial-gradient(950px 520px at 15% 0%, rgba(255,170,110,.32), transparent 60%),
         radial-gradient(950px 520px at 85% 10%, rgba(141,225,255,.26), transparent 60%),
@@ -188,7 +188,9 @@
     /* Banner pequeño: palabra por palabra, con espacios bien visibles */
     .lead-banner{
       display:block;
-      font: 600 11px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-weight:600;
+      font-size:clamp(14px, 2.4vw, 22px); /* ~2x más grande */
+      line-height:1;
       letter-spacing:.12em;
       text-transform:uppercase;
       color:#b5c4ff;
@@ -210,11 +212,11 @@
       }
     }
 
-    /* Banner grande: Abril Ruzmed, más ancho y menos alto */
+    /* Banner grande: Abril Ruzmed, ahora ocupa todo el ancho del wrap y tiene imagen de fondo */
     .title-banner{
       display:block;
       width:100%;
-      max-width:720px;        /* mismo ancho que el reel */
+      max-width:none;
       margin:0 auto;
 
       font-family: "Cinzel", serif;
@@ -223,14 +225,15 @@
       font-size:clamp(38px, 7.4vw, 86px);
       letter-spacing:.03em;
       color: var(--ink);
+
       background:
-        radial-gradient(120% 160% at 50% 0%, rgba(255,255,255,.12), transparent 60%),
-        linear-gradient(180deg, rgba(12,14,22,.92), rgba(12,14,22,.58));
+        linear-gradient(180deg, rgba(6,7,12,.86), rgba(6,7,12,.6)),
+        url('assets/hero_banner.jpg') center/cover no-repeat;
+
       border:1px solid color-mix(in oklab, var(--line) 70%, #3f4c7a 30%);
       border-radius:22px;
 
-      /* MÁS ANCHO, MENOS ALTO */
-      padding:clamp(8px, 1.2vw, 12px) clamp(40px, 5vw, 72px);
+      padding:clamp(10px, 1.4vw, 14px) clamp(32px, 4vw, 56px);
 
       box-shadow:
         0 22px 70px rgba(0,0,0,.78),
@@ -238,16 +241,6 @@
       position:relative;
       isolation:isolate;
       animation: lightsOn 1.6s ease-out both;
-    }
-
-    .title-banner .title-sub{
-      font-weight:500;
-      letter-spacing:.12em;
-      font-size:.45em;
-      text-transform:uppercase;
-      display:block;
-      margin-top:6px;
-      color:#b5c4ff;
     }
 
     .title-banner::before{
@@ -264,28 +257,12 @@
     }
 
     .tag{
-      margin-top:28px;  /* más espacio respecto al banner */
-      max-width:78ch;
+      margin-top:32px;
+      max-width:64ch;
       text-align:center;
       color:var(--mute);
-    }
-
-    .chips{
-      margin-top:20px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    .chip{
-      border:1px solid rgba(140,255,180,.75);
-      background: radial-gradient(120% 160% at 50% 0%, rgba(80,255,170,.12), transparent 60%),
-                  #07170f;
-      padding:8px 14px;
-      border-radius:999px;
-      font-size:14px;
-      color:#9fffb4;
-      box-shadow:0 0 20px rgba(60,200,140,.35);
+      font-size:clamp(18px, 2.5vw, 28px); /* ~2x más grande */
+      line-height:1.5;
     }
 
     @keyframes lightsOn {
@@ -414,7 +391,7 @@
     }
 
     @media(min-width: 760px){
-      .hero{ padding:88px 0 40px; } /* ajustado en desktop también */
+      .hero{ padding:88px 0 80px; }
     }
 
     /* ---------- CONTACT + ICONOS ---------- */
@@ -433,20 +410,17 @@
       margin-right:0;
     }
 
-    .social-icon{
-      width:36px;
-      height:36px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:radial-gradient(120% 160% at 50% 0%, rgba(141,225,255,.18), transparent 60%),
-                 #05060b;
+    .social-link{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      font-size:13px;
-      font-weight:600;
-      letter-spacing:.06em;
-      color:#e8ecf3;
+    }
+
+    .social-icon{
+      width:32px;
+      height:32px;
+      display:block;
+      filter:drop-shadow(0 0 6px rgba(0,0,0,.7));
     }
   </style>
 </head>
@@ -471,19 +445,19 @@
           MEXICAN CINEMATOGRAPHER BASED IN BERLIN
         </span>
 
-        <!-- Banner grande Abril Ruzmed, más ancho de los lados -->
+        <!-- Banner grande Abril Ruzmed -->
         <h1 class="title-banner">
           Abril Ruzmed
-          <span class="title-sub">Cinematographer</span>
         </h1>
 
-        <p class="tag reveal" id="tagline">
-          Audiovisual creator, filmmaker, cinematographer — 10+ years between Mexico and Berlin.
-          Lighting, camera movement, and creative editing in service of story across narrative,
-          documentary, and commercial work.
+        <!-- Tagline en dos líneas, más grande, con typewriter más lento -->
+        <p
+          class="tag reveal"
+          id="tagline"
+          data-text="Narrative, documentary and commercial cinematography between Mexico and Berlin.\nLight, movement and color crafted around character, mood and emotion.">
+          Narrative, documentary and commercial cinematography between Mexico and Berlin.<br>
+          Light, movement and color crafted around character, mood and emotion.
         </p>
-
-        <!-- Eliminamos los chips originales de Narrative / Documentary, etc. -->
       </div>
     </section>
 
@@ -539,7 +513,7 @@
           <article class="card proj reveal">
             <div class="meta">
               <h3 style="margin:0">The Serial Däter</h3>
-              <div class="roles">
+            <div class="roles">
                 <span class="role-chip">DoP</span>
               </div>
             </div>
@@ -625,17 +599,17 @@
             <a class="btn" href="mailto:aruiz.med@gmail.com?subject=Inquiry%20—%20Cinematography">aruiz.med@gmail.com</a>
           </p>
           <p class="links" aria-label="External profiles">
-            <a href="https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk" target="_blank" rel="noopener" aria-label="IMDb">
-              <span class="social-icon">IM</span>
+            <a href="https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk" target="_blank" rel="noopener" aria-label="IMDb" class="social-link">
+              <img src="assets/icon_imdb.svg" alt="IMDb" class="social-icon" />
             </a>
-            <a href="https://www.crew-united.com/de/Abril-Ruzmed_740412.html" target="_blank" rel="noopener" aria-label="Crew United">
-              <span class="social-icon">CU</span>
+            <a href="https://www.crew-united.com/de/Abril-Ruzmed_740412.html" target="_blank" rel="noopener" aria-label="Crew United" class="social-link">
+              <img src="assets/icon_crew_united.svg" alt="Crew United" class="social-icon" />
             </a>
-            <a href="https://www.instagram.com/abril_ruzmed/" target="_blank" rel="noopener" aria-label="Instagram">
-              <span class="social-icon">IG</span>
+            <a href="https://www.instagram.com/abril_ruzmed/" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
+              <img src="assets/icon_instagram.svg" alt="Instagram" class="social-icon" />
             </a>
-            <a href="https://www.linkedin.com/in/abril-ruzmed-12385a56/" target="_blank" rel="noopener" aria-label="LinkedIn">
-              <span class="social-icon">IN</span>
+            <a href="https://www.linkedin.com/in/abril-ruzmed-12385a56/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
+              <img src="assets/icon_linkedin.svg" alt="LinkedIn" class="social-icon" />
             </a>
           </p>
         </div>
@@ -700,29 +674,33 @@
       });
     }
 
-    // Máquina de escribir para el tagline
+    // Máquina de escribir para el tagline, más lento y respetando saltos de línea
     const prefersReduced = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const tagline = document.getElementById('tagline');
     if (tagline) {
-      const fullText = tagline.textContent.trim();
+      const fullText = (tagline.dataset.text || tagline.textContent).trim();
+
+      function renderWithBreaks(str) {
+        return str.replace(/\n/g, '<br>');
+      }
 
       if (prefersReduced) {
-        tagline.textContent = fullText;
+        tagline.innerHTML = renderWithBreaks(fullText);
       } else {
-        tagline.textContent = "";
+        tagline.innerHTML = "";
         let i = 0;
 
         function typeNext() {
           if (i <= fullText.length) {
             const visible = fullText.slice(0, i);
-            tagline.textContent = visible + '▌'; // cursor
+            tagline.innerHTML = renderWithBreaks(visible) + '▌'; // cursor
             i++;
-            const delay = 28;
+            const delay = 56; // más lento (~2x)
             setTimeout(typeNext, delay);
           } else {
-            tagline.textContent = fullText; // quitamos el cursor al final
+            tagline.innerHTML = renderWithBreaks(fullText); // quitamos cursor
           }
         }
 
