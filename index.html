@@ -173,9 +173,12 @@
       position: relative;
       padding: 72px 0 72px; /* más espacio debajo del hero */
       background:
-        radial-gradient(950px 520px at 15% 0%, rgba(255,170,110,.32), transparent 60%),
-        radial-gradient(950px 520px at 85% 10%, rgba(141,225,255,.26), transparent 60%),
-        var(--grad);
+  linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,.5)),
+  url("assets/hero_background.jpg") center/cover no-repeat,
+  radial-gradient(...),
+  radial-gradient(...),
+  var(--grad);
+
       overflow: hidden;
     }
     .hero .wrap{
@@ -222,7 +225,8 @@
       font-family: "Cinzel", serif;
       font-weight:700;
       line-height:1.05;
-      font-size:clamp(38px, 7.4vw, 86px);
+      font-size:clamp(68px, 13vw, 160px);
+
       letter-spacing:.03em;
       color: var(--ink);
 
@@ -257,7 +261,9 @@
     }
 
     .tag{
-      margin-top:32px;
+  margin-top:60px; /* antes 32 */
+}
+
       max-width:64ch;
       text-align:center;
       color:var(--mute);
