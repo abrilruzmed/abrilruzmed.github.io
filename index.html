@@ -13,7 +13,7 @@
   <meta property="og:description" content="Film, documentary, and commercial cinematography. Based in Berlin. Available in Europe and Latin America." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://abrilruzmed.github.io/" />
-  <meta property="og:image" content="https://abrilruzmed.github.io/assets/showreel.jpg" />
+  <meta property="og:image" content="https://abrilruzmed.github.io/assets/showreel_hero.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" href="assets/favicon.png" />
@@ -45,27 +45,40 @@
     .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
 
     header.nav{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter:saturate(150%) blur(8px);
-      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      position:fixed; top:0; left:0; right:0; z-index:30;
+      backdrop-filter:saturate(150%) blur(10px);
+      background: color-mix(in oklab, var(--bg) 82%, transparent);
       border-bottom:1px solid var(--line);
     }
     .nav-inner{
       display:flex;
       align-items:center;
-      justify-content:flex-start;
-      padding:16px 0;
+      justify-content:space-between;
+      padding:10px 20px;
+      max-width:var(--max);
+      margin:0 auto;
+    }
+    .logo-mark{
+      font-family:"Cinzel", serif;
+      font-size:16px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      opacity:.9;
     }
     .menu{
       display:flex;
       align-items:center;
       gap:16px;
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
     }
     .menu a{
       color:var(--ink); opacity:.9;
-      font-size:14px; letter-spacing:.04em; text-transform:uppercase;
     }
     .menu a:hover{opacity:1}
+
+    main{margin-top:56px;}
 
     section{padding:var(--space-6) 0}
 
@@ -82,34 +95,237 @@
     h1{margin:0;}
     h2{margin:0 0 12px; font-size:clamp(20px,3.3vw,28px)}
 
-    /* SHOWREEL */
-    .showreel-thumb{
+    /* ---------- HERO FULLSCREEN ---------- */
+
+    .hero{
       position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+      background:
+        radial-gradient(950px 520px at 15% 0%, rgba(255,170,110,.32), transparent 60%),
+        radial-gradient(950px 520px at 85% 10%, rgba(141,225,255,.26), transparent 60%),
+        var(--grad);
+      overflow:hidden;
+    }
+
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(1,3,8,.85), rgba(1,3,8,.35)),
+        url("assets/showreel_hero.jpg") center/cover no-repeat;
+      filter:saturate(110%) contrast(105%);
+      transform:scale(1.04);
+      transform-origin:center;
+    }
+
+    .hero-overlay{
+      position:relative;
+      z-index:1;
+      width:100%;
+      display:flex;
+      align-items:center;
+    }
+
+    .hero-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:40px 20px 72px;
+      display:grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap:40px;
+    }
+    @media(max-width:860px){
+      .hero-inner{
+        grid-template-columns:1fr;
+        gap:24px;
+      }
+    }
+
+    .hero-text{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      max-width:520px;
+    }
+
+    .lead-banner{
+      display:block;
+      font-weight:600;
+      font-size:clamp(13px, 2.3vw, 20px);
+      line-height:1;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#c5d2ff;
+      margin-bottom:18px;
+    }
+
+    .hero-name{
+      font-family:"Cinzel", serif;
+      font-weight:700;
+      font-size:clamp(42px, 6.5vw, 80px);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin:0 0 14px;
+      text-shadow:0 18px 70px rgba(0,0,0,.8);
+    }
+
+    .hero-tagline{
+      margin:0 0 22px;
+      max-width:38rem;
+      color:var(--mute);
+      font-size:clamp(17px, 2.3vw, 22px);
+      line-height:1.5;
+      min-height:3.2em; /* espacio para el typewriter */
+    }
+
+    .hero-cta-row{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .btn-primary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 20px;
+      border-radius:999px;
+      border:1px solid rgba(140,255,180,.8);
+      background: radial-gradient(120% 160% at 50% 0%, rgba(80,255,170,.2), transparent 60%), #07170f;
+      color:#9fffb4;
+      font-weight:600;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:13px;
+      box-shadow:0 0 22px rgba(60,200,140,.4);
+      text-decoration:none;
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .btn-primary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 0 30px rgba(100,255,190,.6);
+      text-decoration:none;
+    }
+
+    .scroll-hint{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      color:var(--mute);
+      opacity:.8;
+    }
+
+    .scroll-dot{
+      width:8px; height:8px;
+      border-radius:999px;
+      border:1px solid var(--mute);
+    }
+
+    .hero-aside{
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      gap:14px;
+      align-items:flex-end;
+    }
+    @media(max-width:860px){
+      .hero-aside{align-items:flex-start;}
+    }
+
+    .hero-still-frame{
+      width:100%;
+      max-width:420px;
       aspect-ratio:16/9;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 24px 80px rgba(0,0,0,.9);
+      background:#000;
+    }
+    .hero-still-frame img{
+      width:100%; height:100%; object-fit:cover;
+      display:block;
+    }
+
+    .hero-caption{
+      font-size:12px;
+      color:var(--mute);
+      text-align:right;
+      max-width:420px;
+    }
+    @media(max-width:860px){
+      .hero-caption{text-align:left;}
+    }
+
+    /* SHOWREEL SECTION */
+
+    .showreel-card h2{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .chip-showreel{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 16px;
+      border-radius:999px;
+      border:1px solid rgba(140,255,180,.75);
+      background: radial-gradient(120% 160% at 50% 0%, rgba(80,255,170,.18), transparent 60%), #07170f;
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.08em;
+      color:#9fffb4;
+      text-transform:uppercase;
+      box-shadow:0 0 18px rgba(60,200,140,.35);
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .chip-showreel:hover{
+      text-decoration:none;
+      box-shadow:0 0 26px rgba(80,255,170,.55);
+    }
+
+    .video-embed{
+      position:relative;
+      width:100%;
+      padding-top:56.25%; /* 16:9 */
       border-radius:14px;
       overflow:hidden;
       border:1px solid var(--line);
-      max-width:720px;
-      margin:0 auto;
+      background:#000;
+      margin-top:10px;
     }
-    .showreel-thumb img{
-      width:100%; height:100%; object-fit:cover; display:block;
-      filter:saturate(110%) contrast(105%);
+    .video-embed iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
     }
 
     /* PROJECTS GRID */
+
     .projects{display:grid; gap:16px; grid-template-columns:repeat(12,1fr)}
     .proj{grid-column:span 12}
     @media(min-width:760px){ .proj{grid-column:span 6} }
 
-    .stills{
+    .stills-grid{
       display:grid; gap:8px;
       grid-template-columns:repeat(12,1fr); margin-top:10px
     }
-    .stills .s1{grid-column:span 12; aspect-ratio:16/9;}
-    .stills .s2,
-    .stills .s3{grid-column:span 6; aspect-ratio:16/9;}
-    .stills img{
+    .stills-grid .s1{grid-column:span 12; aspect-ratio:16/9;}
+    .stills-grid .s2,
+    .stills-grid .s3{grid-column:span 6; aspect-ratio:16/9;}
+    .stills-grid img{
       width:100%; height:100%;
       object-fit:cover;
       display:block;
@@ -147,16 +363,204 @@
       letter-spacing:.08em;
     }
 
-    .links a{margin-right:14px}
+    /* STILLS / PHOTOS */
 
-    .btn{
-      display:inline-block; padding:10px 14px;
-      border-radius:10px; border:1px solid var(--line);
-      background:#0c0f18; color:var(--ink);
-      font-weight:600;
+    .photo-grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:10px;
     }
-    .btn:hover{background:#101424}
-    .btn:focus-visible{outline:2px solid var(--glow); outline-offset:2px}
+    .photo-grid figure{
+      grid-column:span 12;
+      margin:0;
+      aspect-ratio:4/3;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow:0 12px 40px rgba(0,0,0,.45);
+      background:#000;
+    }
+    @media(min-width:760px){
+      .photo-grid figure{grid-column:span 4;}
+    }
+    .photo-grid img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .photo-grid figcaption{
+      padding:6px 4px 0;
+      font-size:12px;
+      color:var(--mute);
+    }
+
+    /* ABOUT */
+
+    .about{text-align:center;}
+    .about-inner{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+    }
+    .about-portrait{
+      width:180px; height:180px;
+      border-radius:999px;
+      object-fit:cover;
+      border:2px solid rgba(141,225,255,.8);
+      box-shadow:0 18px 50px rgba(0,0,0,.6);
+    }
+    .about-text{
+      max-width:75ch;
+      color:var(--mute);
+    }
+    .about-text p{margin:0 0 10px;}
+
+    /* BTS */
+
+    .bts-block h3{
+      margin:0 0 12px;
+      font-size:18px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#b5c4ff;
+    }
+    .bts-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+    @media(min-width:760px){
+      .bts-grid{grid-template-columns:repeat(5,1fr);}
+    }
+    .bts-grid img{
+      width:100%; height:100%;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid var(--line);
+      box-shadow:0 10px 32px rgba(0,0,0,.6);
+      aspect-ratio:4/3;
+      transition:transform .3s ease, box-shadow .3s ease, filter .3s ease;
+      transform-origin:center;
+    }
+
+    /* CONTACT */
+
+    #contact .card{
+      display:grid;
+      grid-template-columns:minmax(0,2fr) minmax(0,2fr);
+      gap:32px;
+    }
+    @media(max-width:760px){
+      #contact .card{grid-template-columns:1fr;}
+    }
+
+    .contact-block h2{
+      margin-bottom:16px;
+    }
+
+    .contact-meta{
+      font-size:14px;
+      color:var(--mute);
+      line-height:1.7;
+    }
+    .contact-label{
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:11px;
+      color:#b5c4ff;
+      margin-top:6px;
+    }
+
+    .contact-email{
+      font-size:15px;
+      margin:8px 0 14px;
+    }
+
+    .btn-email{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 16px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#0c0f18;
+      color:var(--ink);
+      font-weight:600;
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      text-decoration:none;
+    }
+    .btn-email:hover{
+      background:#101424;
+      text-decoration:none;
+    }
+
+    .links{
+      margin-top:16px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .social-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .social-icon{
+      width:28px;
+      height:28px;
+      display:block;
+      filter:drop-shadow(0 0 6px rgba(0,0,0,.7));
+    }
+
+    .contact-note{
+      margin-top:16px;
+      font-size:13px;
+      color:var(--mute);
+    }
+
+    .contact-form{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .contact-form label{
+      font-size:13px;
+      color:var(--mute);
+    }
+    .contact-form input,
+    .contact-form textarea{
+      width:100%;
+      padding:8px 10px;
+      border-radius:8px;
+      border:1px solid var(--line);
+      background:#050712;
+      color:var(--ink);
+      font-family:inherit;
+      font-size:14px;
+    }
+    .contact-form textarea{min-height:90px; resize:vertical;}
+
+    .contact-form button{
+      align-self:flex-start;
+      margin-top:4px;
+      padding:8px 18px;
+      border-radius:999px;
+      border:1px solid rgba(140,255,180,.75);
+      background:#07170f;
+      color:#9fffb4;
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    .contact-form button:hover{
+      box-shadow:0 0 18px rgba(80,255,170,.55);
+    }
 
     footer{
       border-top:1px solid var(--line); color:var(--mute);
@@ -167,125 +571,23 @@
     .reveal{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease}
     .reveal.in{opacity:1; transform:none}
 
-    /* ---------- HERO ---------- */
+    /* IMAGE HOVERS */
 
-    .hero{
-      position: relative;
-      padding: 72px 0 72px; /* más espacio debajo del hero */
-      background:
-  linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,.5)),
-  url("assets/hero_background.jpg") center/cover no-repeat,
-  radial-gradient(...),
-  radial-gradient(...),
-  var(--grad);
-
-      overflow: hidden;
-    }
-    .hero .wrap{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      text-align:center;
-    }
-
-    /* Banner pequeño: palabra por palabra, con espacios bien visibles */
-    .lead-banner{
-      display:block;
-      font-weight:600;
-      font-size:clamp(14px, 2.4vw, 22px); /* ~2x más grande */
-      line-height:1;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:#b5c4ff;
-      margin-bottom:20px;
-      text-align:center;
-    }
-    .lead-banner .word{
-      opacity:0;
-      display:inline-block;
-      transform:translateX(-16px);
-      animation: slideInWord .45s ease-out forwards;
-      animation-delay: calc(var(--i) * 0.18s);
-      white-space:nowrap;
-    }
-    @keyframes slideInWord {
-      to{
-        opacity:1;
-        transform:translateX(0);
+    @media (hover:hover){
+      .stills-grid img:hover{
+        transform:scale(1.8);
+        z-index:3;
+        box-shadow:0 18px 60px rgba(0,0,0,.85);
+        filter:saturate(118%) contrast(110%);
+      }
+      .bts-grid img:hover{
+        transform:scale(4);
+        box-shadow:0 24px 80px rgba(0,0,0,.9);
+        filter:saturate(120%) contrast(112%);
       }
     }
 
-    /* Banner grande: Abril Ruzmed, ahora ocupa todo el ancho del wrap y tiene imagen de fondo */
-    .title-banner{
-      display:block;
-      width:100%;
-      max-width:none;
-      margin:0 auto;
-
-      font-family: "Cinzel", serif;
-      font-weight:700;
-      line-height:1.05;
-      font-size:clamp(68px, 13vw, 160px);
-
-      letter-spacing:.03em;
-      color: var(--ink);
-
-      background:
-        linear-gradient(180deg, rgba(6,7,12,.86), rgba(6,7,12,.6)),
-        url('assets/hero_banner.jpg') center/cover no-repeat;
-
-      border:1px solid color-mix(in oklab, var(--line) 70%, #3f4c7a 30%);
-      border-radius:22px;
-
-      padding:clamp(10px, 1.4vw, 14px) clamp(32px, 4vw, 56px);
-
-      box-shadow:
-        0 22px 70px rgba(0,0,0,.78),
-        inset 0 0 40px rgba(255,255,255,.04);
-      position:relative;
-      isolation:isolate;
-      animation: lightsOn 1.6s ease-out both;
-    }
-
-    .title-banner::before{
-      content:"";
-      position:absolute; inset:-10px -16px -12px -16px;
-      border-radius:26px;
-      pointer-events:none;
-      background:
-        radial-gradient(420px 220px at 0% 50%, rgba(255,190,120,.32), transparent 70%),
-        radial-gradient(360px 200px at 100% 40%, rgba(140,220,255,.28), transparent 70%);
-      mix-blend-mode:screen;
-      opacity:1;
-      z-index:-1;
-    }
-
-    .tag{
-  margin-top:60px; /* antes 32 */
-}
-
-      max-width:64ch;
-      text-align:center;
-      color:var(--mute);
-      font-size:clamp(18px, 2.5vw, 28px); /* ~2x más grande */
-      line-height:1.5;
-    }
-
-    @keyframes lightsOn {
-      0% { opacity:0; text-shadow:none; filter:brightness(0.3); }
-      40% { opacity:0; text-shadow:none; }
-      60% { opacity:.7; text-shadow:0 0 22px rgba(255,200,140,.7); filter:brightness(1); }
-      80% { opacity:1; text-shadow:0 0 30px rgba(141,225,255,.9); }
-      100% { opacity:1; text-shadow:0 0 10px rgba(141,225,255,.45); filter:brightness(1); }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .title-banner{ animation:none; }
-      .lead-banner .word{ animation:none; opacity:1; transform:none; }
-      *{scroll-behavior:auto; transition:none !important; animation:none !important;}
-    }
-
-    /* ---------- ATMÓSFERA SET ---------- */
+    /* ATMOSPHERE */
 
     body::before,
     body::after{
@@ -317,125 +619,21 @@
 
     header.nav, main, footer{ position:relative; z-index:1; }
 
-    /* ---------- ABOUT + BTS ---------- */
-
-    .about{text-align:center;}
-    .about-inner{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:18px;
-    }
-    .about-portrait{
-      width:180px; height:180px;
-      border-radius:999px;
-      object-fit:cover;
-      border:2px solid rgba(141,225,255,.8);
-      box-shadow:0 18px 50px rgba(0,0,0,.6);
-    }
-    .about-text{
-      max-width:75ch;
-      color:var(--mute);
-    }
-    .about-text p{margin:0 0 10px;}
-
-    .bts-block{
-      margin-top:26px;
-      text-align:left;
-      width:100%;
-    }
-    .bts-block h3{
-      margin:0 0 12px;
-      font-size:18px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#b5c4ff;
-    }
-    .bts-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-    }
-    @media(min-width:760px){
-      .bts-grid{grid-template-columns:repeat(5,1fr);}
-    }
-    .bts-grid img{
-      width:100%; height:100%;
-      object-fit:cover;
-      border-radius:10px;
-      border:1px solid var(--line);
-      box-shadow:0 10px 32px rgba(0,0,0,.6);
-      aspect-ratio:4/3;
-    }
-
-    /* ---------- HOVER IMÁGENES ---------- */
-
-    .showreel-thumb img,
-    .bts-grid img,
-    .about-portrait{
-      transition:transform .3s ease, box-shadow .3s ease, filter .3s ease;
-      transform-origin:center;
-    }
-
-    @media (hover:hover){
-      /* Proyectos: zoom fuerte pero sin fixed, para evitar flicker */
-      .stills img:hover{
-        transform:scale(1.8);
-        z-index:3;
-        box-shadow:0 18px 60px rgba(0,0,0,.85);
-        filter:saturate(118%) contrast(110%);
-      }
-
-      /* BTS + retrato: zoom fuerte local */
-      .bts-grid img:hover,
-      .about-portrait:hover{
-        transform:scale(4);
-        box-shadow:0 24px 80px rgba(0,0,0,.9);
-        filter:saturate(120%) contrast(112%);
-      }
-      /* Reel sin zoom */
-    }
-
-    @media(min-width: 760px){
-      .hero{ padding:88px 0 80px; }
-    }
-
-    /* ---------- CONTACT + ICONOS ---------- */
-
-    #contact .card{
-      text-align:center;
-    }
-
-    .links{
-      margin-top:10px;
-      display:flex;
-      justify-content:center;
-      gap:12px;
-    }
-    .links a{
-      margin-right:0;
-    }
-
-    .social-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .social-icon{
-      width:32px;
-      height:32px;
-      display:block;
-      filter:drop-shadow(0 0 6px rgba(0,0,0,.7));
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto; transition:none !important; animation:none !important;}
     }
   </style>
 </head>
 <body>
   <header class="nav">
-    <div class="wrap nav-inner">
+    <div class="nav-inner">
+      <div class="logo-mark">Abril Ruzmed</div>
       <nav class="menu" aria-label="Primary navigation">
+        <a href="#hero">Home</a>
         <a href="#showreel">Showreel</a>
-        <a href="#work">Work</a>
+        <a href="#work">Selected Work</a>
+        <a href="#bts">Behind the Scenes</a>
+        <a href="#stills">Stills</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -443,48 +641,64 @@
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="wrap">
-        <!-- Banner pequeño con ESPACIOS entre palabras -->
-        <span class="lead-banner">
-          MEXICAN CINEMATOGRAPHER BASED IN BERLIN
-        </span>
+    <!-- HERO FULLSCREEN -->
+    <section class="hero" id="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay">
+        <div class="hero-inner">
+          <div class="hero-text">
+            <span class="lead-banner">Mexican cinematographer based in Berlin</span>
+            <h1 class="hero-name">Abril Ruzmed</h1>
+            <p
+              class="hero-tagline"
+              id="tagline"
+              data-line1="Narrative, documentary and commercial cinematography between Mexico and Berlin."
+              data-line2="Light, movement and color crafted around character, mood and emotion.">
+              Narrative, documentary and commercial cinematography between Mexico and Berlin.<br>
+              Light, movement and color crafted around character, mood and emotion.
+            </p>
+            <div class="hero-cta-row">
+              <a href="#showreel" class="btn-primary">Play showreel</a>
+              <div class="scroll-hint">
+                <span class="scroll-dot"></span>
+                <span>Scroll to see selected work</span>
+              </div>
+            </div>
+          </div>
 
-        <!-- Banner grande Abril Ruzmed -->
-        <h1 class="title-banner">
-          Abril Ruzmed
-        </h1>
-
-        <!-- Tagline en dos líneas, más grande, con typewriter más lento -->
-        <p
-  class="tag reveal"
-  id="tagline"
-  data-line1="Narrative, documentary and commercial cinematography between Mexico and Berlin."
-  data-line2="Light, movement and color crafted around character, mood and emotion.">
-  Narrative, documentary and commercial cinematography between Mexico and Berlin.<br>
-  Light, movement and color crafted around character, mood and emotion.
-</p>
-
+          <aside class="hero-aside">
+            <div class="hero-still-frame">
+              <img src="assets/showreel_hero.jpg" alt="Still from showreel by Abril Ruzmed" loading="lazy" />
+            </div>
+            <div class="hero-caption">
+              Selected still from recent projects — frames from fiction, documentary and experimental work.
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
 
     <!-- SHOWREEL -->
     <section id="showreel">
       <div class="wrap">
-        <div class="card reveal">
-          <a href="https://youtu.be/cUrWuwiuDuI" target="_blank" rel="noopener" class="chip chip-showreel">
-  Watch showreel
-</a>
-
-          <a class="showreel-thumb" href="https://youtu.be/cUrWuwiuDuI" target="_blank" rel="noopener">
-            <img src="assets/showreel.jpg" alt="Showreel thumbnail" />
-          </a>
+        <div class="card reveal showreel-card">
+          <h2>
+            Showreel
+            <a class="chip-showreel" href="https://youtu.be/cUrWuwiuDuI" target="_blank" rel="noopener">Open on YouTube</a>
+          </h2>
+          <div class="video-embed">
+            <iframe
+              src="https://www.youtube.com/embed/cUrWuwiuDuI?autoplay=1&mute=1&loop=1&playlist=cUrWuwiuDuI&controls=1&rel=0"
+              title="Abril Ruzmed showreel"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- WORK -->
+    <!-- SELECTED WORK -->
     <section id="work">
       <div class="wrap">
         <h2 class="reveal">Selected Work</h2>
@@ -499,7 +713,7 @@
                 <span class="role-chip">Colorist</span>
               </div>
             </div>
-            <div class="stills">
+            <div class="stills-grid">
               <img class="s1" src="assets/prototype1.jpg" alt="Prototype still 1" loading="lazy" />
               <img class="s2" src="assets/prototype2.jpg" alt="Prototype still 2" loading="lazy" />
               <img class="s3" src="assets/prototype3.jpg" alt="Prototype still 3" loading="lazy" />
@@ -514,7 +728,7 @@
                 <span class="role-chip">Colorist</span>
               </div>
             </div>
-            <div class="stills">
+            <div class="stills-grid">
               <img class="s1" src="assets/afterlife1.jpg" alt="After Life still 1" loading="lazy" />
               <img class="s2" src="assets/afterlife2.jpg" alt="After Life still 2" loading="lazy" />
               <img class="s3" src="assets/afterlife3.jpg" alt="After Life still 3" loading="lazy" />
@@ -524,11 +738,11 @@
           <article class="card proj reveal">
             <div class="meta">
               <h3 style="margin:0">The Serial Däter</h3>
-            <div class="roles">
+              <div class="roles">
                 <span class="role-chip">DoP</span>
               </div>
             </div>
-            <div class="stills">
+            <div class="stills-grid">
               <img class="s1" src="assets/serialdater1.jpg" alt="The Serial Däter still 1" loading="lazy" />
               <img class="s2" src="assets/serialdater2.jpg" alt="The Serial Däter still 2" loading="lazy" />
               <img class="s3" src="assets/serialdater3.jpg" alt="The Serial Däter still 3" loading="lazy" />
@@ -544,7 +758,7 @@
                 <span class="role-chip">Colorist</span>
               </div>
             </div>
-            <div class="stills">
+            <div class="stills-grid">
               <img class="s1" src="assets/summers1.jpg" alt="Summers in January still 1" loading="lazy" />
               <img class="s2" src="assets/summers2.jpg" alt="Summers in January still 2" loading="lazy" />
               <img class="s3" src="assets/summers3.jpg" alt="Summers in January still 3" loading="lazy" />
@@ -554,7 +768,56 @@
       </div>
     </section>
 
-    <!-- ABOUT + BTS -->
+    <!-- BEHIND THE SCENES -->
+    <section id="bts">
+      <div class="wrap">
+        <div class="card reveal">
+          <h2>Behind the Scenes</h2>
+          <div class="bts-block">
+            <div class="bts-grid">
+              <img src="assets/bts1.jpg" alt="Behind the scenes 1" loading="lazy" />
+              <img src="assets/bts2.jpg" alt="Behind the scenes 2" loading="lazy" />
+              <img src="assets/bts3.jpg" alt="Behind the scenes 3" loading="lazy" />
+              <img src="assets/bts4.jpg" alt="Behind the scenes 4" loading="lazy" />
+              <img src="assets/bts5.jpg" alt="Behind the scenes 5" loading="lazy" />
+              <img src="assets/bts6.jpg" alt="Behind the scenes 6" loading="lazy" />
+              <img src="assets/bts7.jpg" alt="Behind the scenes 7" loading="lazy" />
+              <img src="assets/bts8.jpg" alt="Behind the scenes 8" loading="lazy" />
+              <img src="assets/bts9.jpg" alt="Behind the scenes 9" loading="lazy" />
+              <img src="assets/bts10.jpg" alt="Behind the scenes 10" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STILLS / PHOTOS -->
+    <section id="stills">
+      <div class="wrap">
+        <div class="card reveal">
+          <h2>Stills & Photography</h2>
+          <p class="contact-note" style="margin-top:4px; max-width:60ch;">
+            Selected stills and photographs exploring light, texture and atmosphere outside of moving image work.
+          </p>
+          <div class="photo-grid" style="margin-top:16px;">
+            <figure>
+              <img src="assets/photo1.jpg" alt="Still / photo 1 by Abril Ruzmed" loading="lazy" />
+              <figcaption>Study in low light and color contrast.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/photo2.jpg" alt="Still / photo 2 by Abril Ruzmed" loading="lazy" />
+              <figcaption>Street atmosphere between Mexico and Berlin.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/photo3.jpg" alt="Still / photo 3 by Abril Ruzmed" loading="lazy" />
+              <figcaption>Texture, reflections and mood.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
     <section id="about">
       <div class="wrap">
         <div class="card about reveal">
@@ -576,24 +839,8 @@
                 Available for projects in Europe and Latin America. Languages: Spanish, English, Portuguese.
               </p>
               <div style="margin-top:10px">
-                <a class="btn" href="assets/cv_abril_ruzmed.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+                <a class="btn-email" href="assets/cv_abril_ruzmed.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
               </div>
-            </div>
-          </div>
-
-          <div class="bts-block">
-            <h3>Behind the Scenes</h3>
-            <div class="bts-grid">
-              <img src="assets/bts1.jpg" alt="Behind the scenes 1" loading="lazy" />
-              <img src="assets/bts2.jpg" alt="Behind the scenes 2" loading="lazy" />
-              <img src="assets/bts3.jpg" alt="Behind the scenes 3" loading="lazy" />
-              <img src="assets/bts4.jpg" alt="Behind the scenes 4" loading="lazy" />
-              <img src="assets/bts5.jpg" alt="Behind the scenes 5" loading="lazy" />
-              <img src="assets/bts6.jpg" alt="Behind the scenes 6" loading="lazy" />
-              <img src="assets/bts7.jpg" alt="Behind the scenes 7" loading="lazy" />
-              <img src="assets/bts8.jpg" alt="Behind the scenes 8" loading="lazy" />
-              <img src="assets/bts9.jpg" alt="Behind the scenes 9" loading="lazy" />
-              <img src="assets/bts10.jpg" alt="Behind the scenes 10" loading="lazy" />
             </div>
           </div>
 
@@ -605,24 +852,61 @@
     <section id="contact">
       <div class="wrap">
         <div class="card reveal">
-          <h2>Contact & Links</h2>
-          <p>
-            <a class="btn" href="mailto:aruiz.med@gmail.com?subject=Inquiry%20—%20Cinematography">aruiz.med@gmail.com</a>
-          </p>
-          <p class="links" aria-label="External profiles">
-  <a href="https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk" target="_blank" rel="noopener" aria-label="IMDb" class="social-link">
-    <img src="assets/icon_imdb.png" alt="IMDb" class="social-icon" />
-  </a>
-  <a href="https://www.crew-united.com/de/Abril-Ruzmed_740412.html" target="_blank" rel="noopener" aria-label="Crew United" class="social-link">
-    <img src="assets/icon_crew_united.png" alt="Crew United" class="social-icon" />
-  </a>
-  <a href="https://www.instagram.com/abril_ruzmed/" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
-    <img src="assets/icon_instagram.svg" alt="Instagram" class="social-icon" />
-  </a>
-  <a href="https://www.linkedin.com/in/abril-ruzmed-12385a56/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
-    <img src="assets/icon_linkedin.png" alt="LinkedIn" class="social-icon" />
-  </a>
-</p>
+          <div class="contact-block">
+            <h2>Contact</h2>
+            <div class="contact-meta">
+              <div class="contact-label">Email</div>
+              <div class="contact-email">
+                <a class="btn-email" href="mailto:aruiz.med@gmail.com?subject=Inquiry%20—%20Cinematography">aruiz.med@gmail.com</a>
+              </div>
+
+              <div class="contact-label">Based in</div>
+              <div>Berlin, Germany</div>
+              <div class="contact-label" style="margin-top:10px;">Available for</div>
+              <div>Europe &amp; Latin America — narrative, documentary and commercial work.</div>
+
+              <div class="contact-label" style="margin-top:14px;">Links</div>
+              <div class="links" aria-label="External profiles">
+                <a href="https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk" target="_blank" rel="noopener" aria-label="IMDb" class="social-link">
+                  <img src="assets/icon_imdb.png" alt="IMDb" class="social-icon" />
+                </a>
+                <a href="https://www.crew-united.com/de/Abril-Ruzmed_740412.html" target="_blank" rel="noopener" aria-label="Crew United" class="social-link">
+                  <img src="assets/icon_crew_united.png" alt="Crew United" class="social-icon" />
+                </a>
+                <a href="https://www.instagram.com/abril_ruzmed/" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
+                  <img src="assets/icon_instagram.svg" alt="Instagram" class="social-icon" />
+                </a>
+                <a href="https://www.linkedin.com/in/abril-ruzmed-12385a56/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
+                  <img src="assets/icon_linkedin.png" alt="LinkedIn" class="social-icon" />
+                </a>
+              </div>
+
+              <p class="contact-note">
+                For detailed project enquiries, please include logline, format, dates, location and references if available.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div class="contact-label">Quick message</div>
+            <form
+              class="contact-form"
+              onsubmit="window.location.href=`mailto:aruiz.med@gmail.com?subject=${encodeURIComponent(this.name.value + ' — website inquiry')}&body=${encodeURIComponent(this.message.value)}`; return false;">
+              <label>
+                Name
+                <input type="text" name="name" placeholder="Your name" required>
+              </label>
+              <label>
+                Email
+                <input type="email" name="reply" placeholder="Your email (optional)">
+              </label>
+              <label>
+                Message
+                <textarea name="message" placeholder="Project, dates, references..." required></textarea>
+              </label>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
 
         </div>
       </div>
@@ -633,7 +917,7 @@
     <div class="wrap">©️ <span id="y"></span> Abril Ruzmed — All rights reserved.</div>
   </footer>
 
-  <!-- Structured data para previews -->
+  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -642,7 +926,7 @@
     "jobTitle":"Cinematographer",
     "url":"https://abrilruzmed.github.io/",
     "email":"mailto:aruiz.med@gmail.com",
-    "image":"https://abrilruzmed.github.io/assets/showreel.jpg",
+    "image":"https://abrilruzmed.github.io/assets/showreel_hero.jpg",
     "sameAs":[
       "https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk",
       "https://www.crew-united.com/de/Abril-Ruzmed_740412.html",
@@ -668,34 +952,18 @@
     }, {threshold: .2});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    // Animación palabra por palabra en "MEXICAN CINEMATOGRAPHER BASED IN BERLIN"
-    const lead = document.querySelector('.lead-banner');
-    if (lead) {
-      const text = lead.textContent.trim();
-      const words = text.split(" ");
-      lead.textContent = "";
-      words.forEach((word, index) => {
-        const span = document.createElement('span');
-        span.textContent = word;
-        span.className = 'word';
-        span.style.setProperty('--i', index);
-        lead.appendChild(span);
-        if (index < words.length - 1) {
-          lead.appendChild(document.createTextNode(" "));
-        }
-      });
-    }
-
-    // Máquina de escribir para el tagline, más lento y respetando saltos de línea
+    // Typewriter for tagline (two lines, slower)
     const prefersReduced = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const tagline = document.getElementById('tagline');
     if (tagline) {
-      const fullText = (tagline.dataset.text || tagline.textContent).trim();
+      const line1 = tagline.dataset.line1 || '';
+      const line2 = tagline.dataset.line2 || '';
+      const fullText = (line1 + '\n' + line2).trim();
 
       function renderWithBreaks(str) {
-        return str.replace(/\n/g, '<br>');
+        return str.replace('\n', '<br>');
       }
 
       if (prefersReduced) {
@@ -707,12 +975,12 @@
         function typeNext() {
           if (i <= fullText.length) {
             const visible = fullText.slice(0, i);
-            tagline.innerHTML = renderWithBreaks(visible) + '▌'; // cursor
+            tagline.innerHTML = renderWithBreaks(visible) + '▌';
             i++;
-            const delay = 56; // más lento (~2x)
+            const delay = 56; // más lento
             setTimeout(typeNext, delay);
           } else {
-            tagline.innerHTML = renderWithBreaks(fullText); // quitamos cursor
+            tagline.innerHTML = renderWithBreaks(fullText);
           }
         }
 
