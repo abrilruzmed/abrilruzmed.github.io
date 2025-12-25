@@ -18,19 +18,20 @@
 
   <link rel="icon" href="assets/favicon.png" />
 
-  <!-- Fuentes -->
+  <!-- Fonts (keep Cinzel for elegant name; keep system sans for body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#080507;
-      --panel:#120b10;
-      --ink:#f3ece7;
-      --mute:#b9a9a0;
-      --line:#2a1810;
-      --glow:#ffcf9a;
+      /* Requested: white background, clean editorial palette */
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --ink:#111111;
+      --mute:#666666;
+      --line:#e9e9e9;
+      --accent:#111111;
       --max:1200px;
     }
 
@@ -39,72 +40,79 @@
       margin:0; padding:0;
       background:var(--bg); color:var(--ink);
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.6;
     }
-    a{color:var(--glow); text-decoration:none}
+    a{color:var(--accent); text-decoration:none}
     a:hover{text-decoration:underline; text-underline-offset:2px}
 
     .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
 
-    /* NAV: sin nombre repetido, sólo menú */
+    /* NAV: simplified, name is now in header (top-left) */
     header.nav{
       position:fixed; top:0; left:0; right:0; z-index:30;
+      background:rgba(255,255,255,.92);
       backdrop-filter:saturate(150%) blur(10px);
-      background:rgba(7,4,4,.88);
-      border-bottom:1px solid rgba(255,180,120,.18);
+      border-bottom:1px solid var(--line);
     }
     .nav-inner{
       display:flex;
       align-items:center;
-      justify-content:flex-end;
-      padding:10px 20px;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 20px;
       max-width:var(--max);
       margin:0 auto;
     }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:220px;
+    }
+    .brand-name{
+      font-family:"Cinzel", serif;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:15px;
+      color:var(--ink);
+      line-height:1.1;
+    }
+    .brand-role{
+      font-size:12px;
+      letter-spacing:.10em;
+      color:var(--mute);
+      text-transform:none;
+    }
+
     .menu{
       display:flex;
       align-items:center;
       gap:16px;
-      font-size:13px;
-      letter-spacing:.08em;
+      font-size:12px;
+      letter-spacing:.14em;
       text-transform:uppercase;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
-    .menu a{
-      color:var(--ink); opacity:.9;
-    }
-    .menu a:hover{opacity:1}
+    .menu a{ color:var(--ink); opacity:.75; }
+    .menu a:hover{ opacity:1; }
 
-    main{margin-top:52px;}
+    main{margin-top:58px;}
 
-    /* HERO HOME: tungsteno + haze, sin stills, reel grande */
-
+    /* HERO: keep reel as centerpiece, remove dramatic background */
     .hero{
       position:relative;
-      min-height:calc(100vh - 52px);
+      min-height:calc(100vh - 58px);
       display:flex;
       align-items:center;
       justify-content:center;
       overflow:hidden;
     }
 
-    .hero-bg{
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(120% 130% at 10% 0%, rgba(255,210,140,.45), transparent 60%),
-        radial-gradient(120% 130% at 90% 10%, rgba(255,130,100,.32), transparent 65%),
-        radial-gradient(160% 160% at 50% 100%, rgba(20,8,4,.9), rgba(6,3,4,1));
-      filter:blur(2px);
-    }
-
-    .hero-haze{
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(120% 80% at 50% 20%, rgba(255,255,255,.12), transparent 60%),
-        radial-gradient(90% 60% at 50% 80%, rgba(0,0,0,.55), transparent 70%);
-      mix-blend-mode:screen;
-      opacity:.9;
-    }
+    /* Remove cinematic gradients/haze: clean white */
+    .hero-bg, .hero-haze{ display:none; }
 
     .hero-overlay{
       position:relative;
@@ -113,250 +121,11 @@
     }
 
     .hero-inner{
-      max-width:1200px; /* más ancho para el reel grande */
+      max-width:1200px;
       margin:0 auto;
-      padding:26px 20px 40px;
+      padding:28px 20px 34px;
       display:flex;
       flex-direction:column;
       align-items:center;
-      text-align:center;
-      gap:18px;
-    }
+      text-align:c
 
-    /* CINTA SCI-FI CON TU NOMBRE EN UNA LÍNEA */
-
-    .lead-banner{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:6px 18px;
-      border-radius:999px;
-      border:1px solid rgba(255,210,140,.7);
-      background:linear-gradient(120deg, rgba(30,16,8,.95), rgba(70,36,18,.9));
-      font-family:"Orbitron", system-ui, sans-serif;
-      font-weight:500;
-      font-size:11px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:#ffe2c4;
-      text-shadow:0 0 18px rgba(255,190,130,.8);
-      box-shadow:
-        0 0 20px rgba(0,0,0,.9),
-        0 0 28px rgba(255,180,120,.45);
-      max-width:100%;
-      white-space:normal;
-    }
-
-    .hero-name{
-      font-family:"Cinzel", serif;
-      font-weight:700;
-      font-size:clamp(40px, 7vw, 64px);
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      margin:6px 0 10px;
-      text-shadow:0 22px 80px rgba(0,0,0,.9);
-    }
-
-    .hero-tagline{
-      margin:8px 0 14px;
-      max-width:40rem;
-      color:var(--mute);
-      font-size:15px;
-      line-height:1.5;
-      min-height:2.4em; /* espacio para el typewriter */
-    }
-
-    .video-embed{
-      position:relative;
-      width:100%;
-      max-width:1100px; /* REEL GRANDE */
-      padding-top:56.25%;
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid rgba(255,215,170,.4);
-      background:#000;
-      box-shadow:0 38px 120px rgba(0,0,0,.96);
-    }
-    .video-embed iframe{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      border:0;
-    }
-
-    .social-row{
-      display:flex;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:center;
-      gap:14px;
-      margin-top:12px;
-    }
-
-    .social-icon{
-      width:28px;
-      height:28px;
-      display:block;
-      filter:drop-shadow(0 0 9px rgba(0,0,0,.9));
-    }
-    .social-link{display:inline-flex; align-items:center; justify-content:center;}
-
-    .hero-note{
-      margin-top:4px;
-      font-size:13px;
-      color:var(--mute);
-    }
-
-    footer{
-      border-top:1px solid rgba(255,190,130,.2);
-      color:var(--mute);
-      font-size:13px;
-      padding:10px 0 18px;
-      text-align:center;
-      position:relative;
-      z-index:1;
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      *{scroll-behavior:auto; transition:none !important; animation:none !important;}
-    }
-  </style>
-</head>
-<body>
-  <header class="nav">
-    <div class="nav-inner">
-      <nav class="menu" aria-label="Primary navigation">
-        <a href="index.html">Home</a>
-        <a href="motion.html">Motion</a>
-        <a href="bts.html">Behind the scenes</a>
-        <a href="stills.html">Stills</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- HOME HERO: SHOWREEL + DESCRIPCIÓN + REDES -->
-    <section class="hero" id="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-haze"></div>
-      <div class="hero-overlay">
-        <div class="hero-inner">
-          <span class="lead-banner">
-            ABRIL RUZMED · MEXICAN CINEMATOGRAPHER · BERLIN
-          </span>
-
-          <h1 class="hero-name">Abril Ruzmed</h1>
-
-          <div class="video-embed">
-            <iframe
-              src="https://www.youtube.com/embed/cUrWuwiuDuI?autoplay=1&mute=1&loop=1&playlist=cUrWuwiuDuI&controls=1&rel=0"
-              title="Abril Ruzmed showreel"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-
-          <p
-            class="hero-tagline"
-            id="tagline"
-            data-line1="Narrative, documentary and commercial cinematography between Mexico and Berlin."
-            data-line2="Light, movement and color crafted around character, mood and emotion.">
-            Narrative, documentary and commercial cinematography between Mexico and Berlin.<br>
-            Light, movement and color crafted around character, mood and emotion.
-          </p>
-
-          <div class="social-row">
-            <a href="mailto:aruiz.med@gmail.com?subject=Inquiry%20—%20Cinematography" class="social-link" aria-label="Email">
-              <span style="font-size:13px; letter-spacing:.12em; text-transform:uppercase;">Email</span>
-            </a>
-            <a href="https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk" target="_blank" rel="noopener" aria-label="IMDb" class="social-link">
-              <img src="assets/icon_imdb.png" alt="IMDb" class="social-icon" />
-            </a>
-            <a href="https://www.crew-united.com/de/Abril-Ruzmed_740412.html" target="_blank" rel="noopener" aria-label="Crew United" class="social-link">
-              <img src="assets/icon_crew_united.png" alt="Crew United" class="social-icon" />
-            </a>
-            <a href="https://www.instagram.com/abril_ruzmed/" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
-              <img src="assets/icon_instagram.svg" alt="Instagram" class="social-icon" />
-            </a>
-            <a href="https://www.linkedin.com/in/abril-ruzmed-12385a56/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
-              <img src="assets/icon_linkedin.png" alt="LinkedIn" class="social-icon" />
-            </a>
-          </div>
-
-          <div class="hero-note">
-            Representing a decade between Mexico and Berlin — fiction, documentary and commercial work.
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    © <span id="y"></span> Abril Ruzmed — All rights reserved.
-  </footer>
-
-  <!-- Structured data -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Person",
-    "name":"Abril Ruzmed",
-    "jobTitle":"Cinematographer",
-    "url":"https://abrilruzmed.github.io/",
-    "email":"mailto:aruiz.med@gmail.com",
-    "image":"https://abrilruzmed.github.io/assets/showreel_hero.jpg",
-    "sameAs":[
-      "https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk",
-      "https://www.crew-united.com/de/Abril-Ruzmed_740412.html",
-      "https://www.instagram.com/abril_ruzmed/",
-      "https://www.linkedin.com/in/abril-ruzmed-12385a56/"
-    ],
-    "address": { "@type":"PostalAddress", "addressLocality":"Berlin", "addressCountry":"DE" }
-  }
-  </script>
-
-  <script>
-    // Footer year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Typewriter para la línea de descripción (2 líneas, más lento)
-    const prefersReduced = window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const tagline = document.getElementById('tagline');
-    if (tagline) {
-      const line1 = tagline.dataset.line1 || '';
-      const line2 = tagline.dataset.line2 || '';
-      const fullText = (line1 + '\n' + line2).trim();
-
-      function renderWithBreaks(str) {
-        return str.replace('\n', '<br>');
-      }
-
-      if (prefersReduced) {
-        tagline.innerHTML = renderWithBreaks(fullText);
-      } else {
-        tagline.innerHTML = "";
-        let i = 0;
-
-        function typeNext() {
-          if (i <= fullText.length) {
-            const visible = fullText.slice(0, i);
-            tagline.innerHTML = renderWithBreaks(visible) + '▌';
-            i++;
-            const delay = 60;
-            setTimeout(typeNext, delay);
-          } else {
-            tagline.innerHTML = renderWithBreaks(fullText);
-          }
-        }
-
-        typeNext();
-      }
-    }
-  </script>
-</body>
-</html>
