@@ -1,13 +1,471 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Test</title>
+
+  <title>Abril Ruzmed — Cinematographer</title>
+  <meta name="description" content="Mexican cinematographer based in Berlin. Narrative, documentary, and commercial work across Europe and Latin America." />
+  <link rel="canonical" href="https://abrilruzmed.github.io/" />
+
+  <!-- Social / Open Graph -->
+  <meta property="og:title" content="Abril Ruzmed — Cinematographer" />
+  <meta property="og:description" content="Film, documentary, and commercial cinematography. Based in Berlin. Available in Europe and Latin America." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://abrilruzmed.github.io/" />
+  <meta property="og:image" content="https://abrilruzmed.github.io/assets/showreel.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="assets/favicon.png" />
+
+  <!-- Fuente vintage para el banner principal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0a0c12; --panel:#0f1220; --ink:#e8ecf3; --mute:#aab1c2; --line:#1c2236; --glow:#8de1ff; --max:1200px;
+      --grad: radial-gradient(1200px 600px at 90% -10%, rgba(90,150,255,.18), transparent 60%),
+              radial-gradient(900px 500px at -10% 20%, rgba(255,120,220,.10), transparent 60%),
+              linear-gradient(180deg, rgba(255,255,255,.02), transparent 40%);
+      --space-1:8px; --space-2:12px; --space-3:16px; --space-4:24px;
+      --space-5:32px; --space-6:48px; --space-7:72px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0; padding:0;
+      background:var(--bg); color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    a{color:var(--glow); text-decoration:none}
+    a:hover{text-decoration:underline; text-underline-offset:2px}
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    header.nav{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(150%) blur(8px);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 0}
+    .brand{font-weight:800; letter-spacing:.6px; font-size:14px;}
+    .menu a{margin-left:16px; color:var(--ink); opacity:.9}
+    .menu a:hover{opacity:1}
+
+    section{padding:var(--space-6) 0}
+
+    .card{
+      background:var(--panel); border:1px solid var(--line);
+      border-radius:18px; padding:18px;
+      box-shadow:0 12px 40px rgba(0,0,0,.35);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    @media (hover:hover){
+      .card:hover{transform:translateY(-2px); box-shadow:0 16px 50px rgba(0,0,0,.45)}
+    }
+
+    h1{margin:0;}
+    h2{margin:0 0 12px; font-size:clamp(20px,3.3vw,28px)}
+
+    /* Showreel (thumbnail linking to YouTube) */
+    .showreel-thumb{
+      position:relative; aspect-ratio:16/9;
+      border-radius:14px; overflow:hidden; border:1px solid var(--line)
+    }
+    .showreel-thumb img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter:saturate(110%) contrast(105%);
+    }
+    .play{
+      position:absolute; inset:auto 16px 16px auto;
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(10,12,18,.6); backdrop-filter:blur(6px);
+      transition:transform .15s ease, background-color .15s ease;
+    }
+    .showreel-thumb:hover .play{transform:scale(1.03)}
+    .showreel-thumb:focus-visible .play{outline:2px solid var(--glow); outline-offset:4px}
+
+    /* Projects grid */
+    .projects{display:grid; gap:16px; grid-template-columns:repeat(12,1fr)}
+    .proj{grid-column:span 12}
+    @media(min-width:760px){ .proj{grid-column:span 6} }
+
+    .stills{
+      display:grid; gap:8px;
+      grid-template-columns:repeat(12,1fr); margin-top:10px
+    }
+    .stills img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      border-radius:10px; border:1px solid var(--line)
+    }
+    .stills .s1{grid-column:span 12}
+    .stills .s2{grid-column:span 6}
+    .stills .s3{grid-column:span 6}
+
+    .meta{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .roles{color:var(--mute); font-size:14px}
+
+    .about p{
+      color:var(--mute); margin:0 0 10px; max-width:75ch;
+    }
+
+    .links a{margin-right:14px}
+
+    .btn{
+      display:inline-block; padding:10px 14px;
+      border-radius:10px; border:1px solid var(--line);
+      background:#0c0f18; color:var(--ink);
+      font-weight:600;
+    }
+    .btn:hover{background:#101424}
+    .btn:focus-visible{outline:2px solid var(--glow); outline-offset:2px}
+
+    footer{
+      border-top:1px solid var(--line); color:var(--mute);
+      font-size:14px; padding:26px 0; margin-top:10px
+    }
+
+    /* Subtle in-view animation */
+    .reveal{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease}
+    .reveal.in{opacity:1; transform:none}
+
+    /* ---------- HERO NUEVO: banners centrados y atmósfera de set ---------- */
+
+    .hero{
+      position: relative;
+      padding: 96px 0 36px;
+      background:
+        radial-gradient(900px 500px at 15% 0%, rgba(255,170,110,.10), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(141,225,255,.10), transparent 60%),
+        var(--grad);
+      overflow: hidden;
+    }
+    .hero .wrap{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+    }
+
+    /* Banner pequeño arriba */
+    .lead-banner{
+      display:inline-block;
+      font: 600 12px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#e8ecf3;
+      background: color-mix(in oklab, var(--panel) 80%, transparent);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:10px 14px;
+      margin-bottom:16px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.35);
+    }
+
+    /* Banner grande: nombre centrado, tipografía vintage */
+    .title-banner{
+      display:inline-block;
+      font-family: "Cinzel", serif;
+      font-weight:700;
+      line-height:1.05;
+      font-size:clamp(36px, 7vw, 84px);
+      letter-spacing:.02em;
+      color: var(--ink);
+      background: linear-gradient(180deg, rgba(12,14,22,.75), rgba(12,14,22,.45));
+      border:1px solid color-mix(in oklab, var(--line) 80%, #2a3555 20%);
+      border-radius:20px;
+      padding:clamp(14px, 2vw, 22px) clamp(18px, 3vw, 30px);
+      box-shadow:
+        0 18px 60px rgba(0,0,0,.5),
+        inset 0 0 40px rgba(255,255,255,.02);
+      position:relative;
+      isolation:isolate;
+      animation: slideInLeft 1s ease-out both;
+    }
+
+    /* Luz cálida + azul tenue dirigida al título */
+    .title-banner::before{
+      content:"";
+      position:absolute; inset:-6px -10px -6px -10px;
+      border-radius:24px;
+      pointer-events:none;
+      background:
+        radial-gradient(400px 180px at 0% 50%, rgba(255,190,120,.22), transparent 70%),
+        radial-gradient(320px 160px at 100% 50%, rgba(140,220,255,.16), transparent 70%);
+      mix-blend-mode:screen;
+      opacity:.9;
+      z-index:-1;
+    }
+
+    /* Descripción centrada */
+    .tag{
+      margin-top:14px;
+      max-width:78ch;
+      text-align:center;
+      color:var(--mute);
+    }
+
+    /* Chips centradas */
+    .chips{
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background:var(--panel);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:14px;
+      color:#d6dbee;
+    }
+
+    /* Animación entrada lateral */
+    @keyframes slideInLeft {
+      from { opacity:0; transform: translateX(-60px); }
+      to   { opacity:1; transform: translateX(0); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .title-banner{ animation:none; }
+      *{scroll-behavior:auto; transition:none !important; animation:none !important;}
+    }
+
+    /* ---------- Atmósfera de set de filmación: haze + keylights ---------- */
+
+    body::before,
+    body::after{
+      content:"";
+      position:fixed;
+      inset:-10% -10% -10% -10%;
+      pointer-events:none;
+      z-index:0;
+    }
+    /* Haze y luces cálidas/frías muy suaves */
+    body::before{
+      background:
+        radial-gradient(1100px 600px at 15% 10%, rgba(255,185,120,.08), transparent 60%),
+        radial-gradient(1000px 520px at 85% 0%, rgba(90,190,255,.07), transparent 60%),
+        radial-gradient(1400px 800px at 50% 0%, rgba(255,255,255,.035), transparent 60%);
+      filter:blur(6px);
+    }
+    /* Viñeta suave que dirige la atención al centro superior */
+    body::after{
+      background:
+        radial-gradient(80% 65% at 50% 20%, transparent 0%, transparent 55%, rgba(0,0,0,.25) 100%);
+      mix-blend-mode:multiply;
+    }
+
+    /* Contenido por encima de la atmósfera */
+    header.nav, main, footer{ position:relative; z-index:1; }
+
+    /* Centrar texto de About */
+    .about{ text-align:center; }
+    .about p{ margin-left:auto; margin-right:auto; }
+
+    /* Suavizar top padding en pantallas grandes */
+    @media(min-width: 760px){
+      .hero{ padding-top:112px; }
+    }
+  </style>
 </head>
-<body style="font-family: system-ui; padding: 40px;">
-  <h1>It works</h1>
-  <p>If you can read this, GitHub Pages is serving index.html correctly.</p>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">Abril Ruzmed — Cinematographer</div>
+      <nav class="menu" aria-label="Primary navigation">
+        <a href="#showreel">Showreel</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <!-- Banner pequeño -->
+        <span class="lead-banner reveal">Mexican cinematographer based in Berlin</span>
+
+        <!-- Banner grande con nombre centrado y vintage -->
+        <h1 class="title-banner">Abril Ruzmed — Cinematographer</h1>
+
+        <!-- Descripción centrada -->
+        <p class="tag reveal" style="margin-top:12px">
+          Audiovisual creator, filmmaker, cinematographer — 10+ years between Mexico and Berlin.
+          Lighting, camera movement, and creative editing in service of story across narrative,
+          documentary, and commercial work.
+        </p>
+
+        <!-- Chips centradas -->
+        <div class="chips reveal">
+          <span class="chip">Narrative</span>
+          <span class="chip">Documentary</span>
+          <span class="chip">Commercial</span>
+          <span class="chip">Color</span>
+          <span class="chip">Motion</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOWREEL (YouTube link) -->
+    <section id="showreel">
+      <div class="wrap">
+        <div class="card reveal">
+          <h2>Showreel</h2>
+          <a class="showreel-thumb" href="https://youtu.be/cUrWuwiuDuI" target="_blank" rel="noopener">
+            <img src="assets/showreel.jpg" alt="Showreel thumbnail" />
+            <span class="play">▶️ Watch on YouTube</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work">
+      <div class="wrap">
+        <h2 class="reveal">Selected Work</h2>
+
+        <div class="projects">
+          <!-- Prototype -->
+          <article class="card proj reveal">
+            <div class="meta">
+              <h3 style="margin:0">Prototype</h3>
+              <div class="roles">Director, DoP, Colorist</div>
+            </div>
+            <div class="stills">
+              <img class="s1" src="assets/prototype1.jpg" alt="Prototype still 1" loading="lazy" />
+              <img class="s2" src="assets/prototype2.jpg" alt="Prototype still 2" loading="lazy" />
+              <img class="s3" src="assets/prototype3.jpg" alt="Prototype still 3" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- After Life -->
+          <article class="card proj reveal">
+            <div class="meta">
+              <h3 style="margin:0">After Life</h3>
+              <div class="roles">DoP, Colorist</div>
+            </div>
+            <div class="stills">
+              <img class="s1" src="assets/afterlife1.jpg" alt="After Life still 1" loading="lazy" />
+              <img class="s2" src="assets/afterlife2.jpg" alt="After Life still 2" loading="lazy" />
+              <img class="s3" src="assets/afterlife3.jpg" alt="After Life still 3" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- The Serial Däter -->
+          <article class="card proj reveal">
+            <div class="meta">
+              <h3 style="margin:0">The Serial Däter</h3>
+              <div class="roles">DoP</div>
+            </div>
+            <div class="stills">
+              <img class="s1" src="assets/serialdater1.jpg" alt="The Serial Däter still 1" loading="lazy" />
+              <img class="s2" src="assets/serialdater2.jpg" alt="The Serial Däter still 2" loading="lazy" />
+              <img class="s3" src="assets/serialdater3.jpg" alt="The Serial Däter still 3" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- Summers in January -->
+          <article class="card proj reveal">
+            <div class="meta">
+              <h3 style="margin:0">Summers in January</h3>
+              <div class="roles">DoP, Editor, Colorist</div>
+            </div>
+            <div class="stills">
+              <img class="s1" src="assets/summers1.jpg" alt="Summers in January still 1" loading="lazy" />
+              <img class="s2" src="assets/summers2.jpg" alt="Summers in January still 2" loading="lazy" />
+              <img class="s3" src="assets/summers3.jpg" alt="Summers in January still 3" loading="lazy" />
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap">
+        <div class="card about reveal">
+          <h2>About</h2>
+          <p>
+            I am a Mexican cinematographer based in Berlin. My practice focuses on lighting design,
+            the narrative energy of camera movement, and the creative intuition of editing.
+          </p>
+          <p>
+            I collaborate on fiction and documentary projects. My journey through production instilled responsibility and resilience,
+            as well as rigor and a deep awareness of the emotional labor we carry while crafting cinema.
+          </p>
+          <p>
+            Available for projects in Europe and Latin America. Languages: Spanish, English, Portuguese.
+          </p>
+          <div style="margin-top:10px">
+            <a class="btn" href="assets/AbrilRuzmed_CV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="wrap">
+        <div class="card reveal">
+          <h2>Contact & Links</h2>
+          <p>
+            <a class="btn" href="mailto:aruiz.med@gmail.com?subject=Inquiry%20—%20Cinematography">aruiz.med@gmail.com</a>
+          </p>
+          <p class="links" aria-label="External profiles">
+            <a href="https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk" target="_blank" rel="noopener">IMDb</a>
+            <a href="https://www.crew-united.com/de/Abril-Ruzmed_740412.html" target="_blank" rel="noopener">Crew United</a>
+            <a href="https://www.instagram.com/abril_ruzmed/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.linkedin.com/in/abril-ruzmed-12385a56/" target="_blank" rel="noopener">LinkedIn</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">©️ <span id="y"></span> Abril Ruzmed — All rights reserved.</div>
+  </footer>
+
+  <!-- Structured data for richer previews -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Abril Ruzmed",
+    "jobTitle":"Cinematographer",
+    "url":"https://abrilruzmed.github.io/",
+    "email":"mailto:aruiz.med@gmail.com",
+    "image":"https://abrilruzmed.github.io/assets/showreel.jpg",
+    "sameAs":[
+      "https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk",
+      "https://www.crew-united.com/de/Abril-Ruzmed_740412.html",
+      "https://www.instagram.com/abril_ruzmed/",
+      "https://www.linkedin.com/in/abril-ruzmed-12385a56/"
+    ],
+    "address": { "@type":"PostalAddress", "addressLocality":"Berlin", "addressCountry":"DE" }
+  }
+  </script>
+
+  <script>
+    // Footer year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Simple reveal on scroll
+    const io = new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+    }, {threshold: .2});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
 </body>
 </html>
 
