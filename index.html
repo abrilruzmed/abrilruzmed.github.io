@@ -181,11 +181,15 @@
       perspective:1000px;
     }
     .flip-inner{
-      position:relative;
-      transform-style:preserve-3d;
-      transition:transform .45s ease;
-      min-height: 360px; /* ensures equal-ish card height */
-    }
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .45s ease;
+  min-height: 420px;   /* más aire para que el reverso no “apriete” */
+}
+@media (max-width: 520px){
+  .flip-inner{ min-height: 460px; }
+}
+
     .flip.is-flipped .flip-inner{ transform:rotateY(180deg); }
 
     .flip-face{
@@ -222,15 +226,19 @@
       gap:8px;
       grid-template-columns:repeat(12,1fr);
     }
-    .stills img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      border-radius:10px;
-      border:1px solid var(--line);
-      background:#f6f6f6;
-    }
+   .stills img{
+  width:100%;
+  height:100%;
+  object-fit:contain;          /* <-- evita recorte */
+  object-position:center;
+  display:block;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#ffffff;          /* <-- fondo limpio para “letterboxing” */
+  padding:6px;                 /* <-- separa la imagen del borde */
+}
+
+
     /* Slightly larger hero still */
     .stills .s1{grid-column:span 12; aspect-ratio:16/9;}
     .stills .s2{grid-column:span 6; aspect-ratio:4/3;}
@@ -389,7 +397,7 @@
       <div class="wrap">
         <div class="card reveal">
           <div class="showreel-head">
-            <h2 style="margin:0;">Watch showreel</h2>
+            <h2 style="margin:0;"></h2>
             <a href="https://youtu.be/cUrWuwiuDuI" target="_blank" rel="noopener">Open on YouTube →</a>
           </div>
 
@@ -545,7 +553,8 @@
     </section>
 
     <!-- ABOUT -->
-    <section id="about">
+    <section id="about" style="padding-top:72px;">
+
       <div class="wrap">
         <div class="card about reveal">
           <h2>About</h2>
@@ -576,28 +585,28 @@
           <!-- Icons: replace filenames later to match your actual asset names -->
           <div class="icon-row" aria-label="External profiles">
             <a class="icon-link" href="https://www.imdb.com/es/name/nm8714108/?ref_=ext_shr_lnk" target="_blank" rel="noopener" aria-label="IMDb">
-              <img src="assets/ICON_IMDB.png" alt="IMDb icon">
+              <img src="assets/icon_imdb.png" alt="IMDb icon">
               <span>IMDb</span>
             </a>
 
             <a class="icon-link" href="https://www.crew-united.com/de/Abril-Ruzmed_740412.html" target="_blank" rel="noopener" aria-label="Crew United">
-              <img src="assets/ICON_CREW_UNITED.png" alt="Crew United icon">
+              <img src="assets/icon_crew_united.png" alt="Crew United icon">
               <span>Crew United</span>
             </a>
 
             <a class="icon-link" href="https://www.instagram.com/abril_ruzmed/" target="_blank" rel="noopener" aria-label="Instagram">
-              <img src="assets/ICON_INSTAGRAM.png" alt="Instagram icon">
+              <img src="assets/icon_instagram.png" alt="Instagram icon">
               <span>Instagram</span>
             </a>
 
             <a class="icon-link" href="https://www.linkedin.com/in/abril-ruzmed-12385a56/" target="_blank" rel="noopener" aria-label="LinkedIn">
-              <img src="assets/ICON_LINKEDIN.png" alt="LinkedIn icon">
+              <img src="assets/icon_linkedin.png" alt="LinkedIn icon">
               <span>LinkedIn</span>
             </a>
           </div>
 
           <p style="margin:12px 0 0; color:var(--mute); font-size:13px;">
-            <code>/assets</code>.
+            <code></code>.
           </p>
         </div>
       </div>
