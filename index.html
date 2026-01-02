@@ -237,6 +237,25 @@
   background:#ffffff;          /* <-- fondo limpio para “letterboxing” */
   padding:6px;                 /* <-- separa la imagen del borde */
 }
+/* Default: show full frame (no cropping) */
+.stills img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#ffffff;
+  padding:6px;
+}
+
+/* Override: for images that should fill the frame */
+.stills img.fill-frame{
+  object-fit:cover;
+  padding:0;            /* fill flush to the frame */
+  background:#ffffff;
+}
 
 
     /* Slightly larger hero still */
@@ -245,11 +264,18 @@
     .stills .s3{grid-column:span 6; aspect-ratio:4/3;}
 
     /* ABOUT text */
-    .about p{
-      color:var(--mute);
-      margin:0 0 10px;
-      max-width:75ch;
-    }
+  .about{
+  text-align:center;
+}
+.about p{
+  color:var(--mute);
+  margin:0 auto 10px;   /* centra el bloque */
+  max-width:75ch;
+}
+.about .btn{
+  margin-top:10px;
+}
+
 
     .btn{
       display:inline-block;
@@ -398,7 +424,7 @@
         <div class="card reveal">
           <div class="showreel-head">
             <h2 style="margin:0;"></h2>
-            <a href="https://youtu.be/cUrWuwiuDuI" target="_blank" rel="noopener">Open on YouTube →</a>
+            <a href="https://youtu.be/cUrWuwiuDuI" target="_blank" rel="noopener">Watch on YouTube →</a>
           </div>
 
           <div class="video-embed" aria-label="Showreel video">
@@ -435,7 +461,8 @@
             <div class="flip-inner">
               <div class="flip-face flip-front">
                 <div class="stills">
-                  <img class="s1" src="assets/prototype1.jpg" alt="Prototype still 1" loading="lazy" />
+                  <img class="s1 fill-frame" src="assets/prototype1.jpg" alt="Prototype still 1" loading="lazy" />
+
                   <img class="s2" src="assets/prototype2.jpg" alt="Prototype still 2" loading="lazy" />
                   <img class="s3" src="assets/prototype3.jpg" alt="Prototype still 3" loading="lazy" />
                 </div>
@@ -499,7 +526,8 @@
             <div class="flip-inner">
               <div class="flip-face flip-front">
                 <div class="stills">
-                  <img class="s1" src="assets/serialdater1.jpg" alt="The Serial Däter still 1" loading="lazy" />
+                 <img class="s1 fill-frame" src="assets/serialdater1.jpg" alt="The Serial Däter still 1" loading="lazy" />
+
                   <img class="s2" src="assets/serialdater2.jpg" alt="The Serial Däter still 2" loading="lazy" />
                   <img class="s3" src="assets/serialdater3.jpg" alt="The Serial Däter still 3" loading="lazy" />
                 </div>
@@ -595,7 +623,7 @@
             </a>
 
             <a class="icon-link" href="https://www.instagram.com/abril_ruzmed/" target="_blank" rel="noopener" aria-label="Instagram">
-              <img src="assets/icon_instagram.png" alt="Instagram icon">
+              <img src="assets/icon_instagram.jpg" alt="Instagram icon">
               <span>Instagram</span>
             </a>
 
